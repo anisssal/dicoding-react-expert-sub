@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import ThreadList from '../components/threads/ThreadList';
 import { asyncPopulateUsersAndThreads } from '../store/shared/shared_action';
+import {
+  asyncToggleDownVotedThread,
+  asyncToggleUpVotedThread,
+} from '../store/threads/action';
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -22,26 +26,28 @@ export default function HomePage() {
 
   function onCommentClickHandler() {}
 
-  function onToggleDownVotedHandler(id, authUserId ) {
-
+  function onToggleDownVotedHandler(id, authUserId) {
+    dispatch(asyncToggleDownVotedThread({ id, authUserId }));
   }
 
-  function onToggleUpVotedHandler(id, authUserId ) {
-
+  function onToggleUpVotedHandler(id, authUserId) {
+    dispatch(asyncToggleUpVotedThread({ id, authUserId }));
   }
 
   return (
     <Grid container>
-      <Grid item sm={3}>
-        {' '}
-      </Grid>
+      <Grid item sm={3}/>
       <Grid item sm={6}>
         <ThreadList
           authUserId={authUser?.id}
           threads={threadsData}
           onCommentsClick={() => onCommentClickHandler()}
-          onToggleDownVoted={(id, authUserId ) => onToggleDownVotedHandler(id, authUserId)}
-          onToggleUpVoted={(id, authUserId ) => onToggleUpVotedHandler(id, authUserId)}
+          onToggleDownVoted={(id, authUserId) =>
+            onToggleDownVotedHandler(id, authUserId)
+          }
+          onToggleUpVoted={(id, authUserId) =>
+            onToggleUpVotedHandler(id, authUserId)
+          }
         />
       </Grid>
       <Grid item sm={3} />

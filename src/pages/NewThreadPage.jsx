@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NewThreadInput from '../components/input/NewThreadInput';
-import {postThread} from "../store/threads/action";
+import {asyncPostThread} from "../store/threads/action";
+import {resetPostThread} from "../store/threads/threads_slice";
 
 function NewThreadPage() {
   const dispatch = useDispatch();
@@ -11,12 +12,18 @@ function NewThreadPage() {
   const { postThreadLoading , postThreadSuccess } = useSelector((states) => states.threads);
 
   function onSubmitThread({ title, body, category }) {
-    dispatch(postThread({ title, body, category }))
+    dispatch(asyncPostThread({ title, body, category }))
   }
+
+  useEffect(() => {
+    dispatch(resetPostThread())
+  }, [dispatch]);
+
 
   useEffect(() => {
     if (postThreadSuccess) navigate('/');
   }, [postThreadSuccess, navigate]);
+
 
   return (
     <Box>
