@@ -57,6 +57,6 @@ export default function UserPopover({ user, onLogout }) {
 }
 
 UserPopover.propTypes = {
-  user: PropTypes.objectOf(PropTypes.shape(userShape)).isRequired,
+  user: PropTypes.shape(userShape).isRequired,
   onLogout: PropTypes.func.isRequired,
 };

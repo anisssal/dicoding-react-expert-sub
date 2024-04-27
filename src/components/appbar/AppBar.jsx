@@ -8,21 +8,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import ForumIcon from '@mui/icons-material/Forum';
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import HomeIcon from '@mui/icons-material/Home';
 import MobileDrawer from './MobileDrawer';
-import UserPopover from './UserPopover';
 import userShape from '../../data/types/user-shape';
 import NavItem from './NavItem';
 import { grey, primary } from '../../themes/palette';
-import {
-  HOME_ROUTE,
-  LEADERBOARDS_ROUTE,
-  LOGIN_ROUTE,
-  REGISTER_ROUTE,
-} from '../../utils/route-name';
+import { HOME_ROUTE, LEADERBOARDS_ROUTE } from '../../utils/route-name';
+import AppBarAction from './AppBarAction';
 
 const navPages = [
   {
@@ -83,6 +76,7 @@ function MyAppBar({ user, onSignOut }) {
               mr: 2,
               fontWeight: 600,
               color: 'grey.900',
+              flexGrow: 1,
               textDecoration: 'none',
             }}
           >
@@ -94,22 +88,7 @@ function MyAppBar({ user, onSignOut }) {
             ))}
           </Box>
 
-          {user && <UserPopover onLogout={onSignOut} user={user} />}
-          {!user && (
-            <Button variant="outlined" component={Link} href={REGISTER_ROUTE}>
-              Sign Up
-            </Button>
-          )}
-          {!user && (
-            <Button
-              variant="contained"
-              sx={{ ml: 1 }}
-              component={Link}
-              href={LOGIN_ROUTE}
-            >
-              Sign In
-            </Button>
-          )}
+          <AppBarAction onSignOut={onSignOut} user={user} />
         </Toolbar>
       </Container>
     </AppBar>

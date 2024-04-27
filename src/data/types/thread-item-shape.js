@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import userShape from "./user-shape.js";
+import userShape from "./user-shape";
 
 const threadItemShape = {
   id: PropTypes.string.isRequired,
@@ -10,7 +10,6 @@ const threadItemShape = {
   totalComments: PropTypes.number.isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  authUser: PropTypes.string,
   user: PropTypes.shape(userShape).isRequired,
 };
 export default threadItemShape;

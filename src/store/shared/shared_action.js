@@ -1,21 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../data/network-api';
-import { setUser } from '../auth/auth_slice';
-import { receiveThreadsActionCreator } from '../threads/action';
+import { receiveThreads } from '../threads/threads_slice';
 import { receiveUsersActionCreator } from '../users/action';
-import { hideGlobalLoading, showGlobalLoading } from './shared_slice';
-
-export const asyncPreloadProcess = createAsyncThunk(
-  'preloadProcess',
-  async (_, { dispatch, rejectWithValue }) => {
-    try {
-      const authUser = await api.getOwnProfile();
-      dispatch(setUser(authUser));
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+import { hideGlobalLoading, showGlobalLoading } from '../common/common_slice';
 
 export const asyncPopulateUsersAndThreads = createAsyncThunk(
     'shared/populateUserAndThreads',
@@ -25,7 +12,7 @@ export const asyncPopulateUsersAndThreads = createAsyncThunk(
             const users = await api.getAllUsers();
             const threads = await api.getAllThreads();
             dispatch(receiveUsersActionCreator(users));
-            dispatch(receiveThreadsActionCreator(threads));
+            dispatch(receiveThreads(threads));
         } catch (error) {
             rejectWithValue(error.message);
         }

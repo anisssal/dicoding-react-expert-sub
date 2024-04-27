@@ -3,7 +3,13 @@ import { Box } from '@mui/material';
 import ThreadCard from './ThreadCard';
 import threadItemShape from '../../data/types/thread-item-shape';
 
-export default function ThreadList({ threads }) {
+export default function ThreadList({
+  threads,
+  authUserId,
+  onToggleDownVoted,
+  onToggleUpVoted,
+  onCommentsClick,
+}) {
   return (
     <Box sx={{ my: 3 }}>
       {threads.map((thread) => (
@@ -16,14 +22,24 @@ export default function ThreadList({ threads }) {
           category={thread.category}
           title={thread.title}
           totalComments={thread.totalComments}
-          authUser={thread.authUser}
+          authUserId={authUserId}
           downVotesBy={thread.downVotesBy}
           upVotesBy={thread.upVotesBy}
+          onToggleUpVoted={onToggleUpVoted}
+          onToggleDownVoted={onToggleDownVoted}
+          onCommentsClick={onCommentsClick}
         />
       ))}
     </Box>
   );
 }
+ThreadList.defaultProps = {
+  authUserId: null,
+};
 ThreadList.propTypes = {
   threads: PropTypes.arrayOf(PropTypes.shape(threadItemShape)).isRequired,
+  authUserId: PropTypes.string,
+  onToggleUpVoted: PropTypes.func.isRequired,
+  onToggleDownVoted: PropTypes.func.isRequired,
+  onCommentsClick: PropTypes.func.isRequired,
 };

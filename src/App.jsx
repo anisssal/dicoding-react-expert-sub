@@ -5,17 +5,18 @@ import { Box } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import HomePage from './pages/HomePage';
 import MyAppBar from './components/appbar/AppBar';
-import { asyncPreloadProcess } from './store/shared/shared_action';
+import { asyncPreloadProcess } from './store/common/common_action';
 import LoginPage from './pages/LoginPage';
 import { signOut } from './store/auth/auth_slice';
 import BackdropLoader from './components/BackdropLoader';
 import NotFoundPage from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
-import {HOME_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE} from "./utils/route-name";
+import {HOME_ROUTE, LOGIN_ROUTE, NEW_THREAD_ROUTE, REGISTER_ROUTE} from "./utils/route-name";
+import NewThreadPage from "./pages/NewThreadPage";
 
 function App() {
   const { authUser } = useSelector((states) => states.auth);
-  const { isPreload, globalLoading } = useSelector((states) => states.shared);
+  const { isPreload, globalLoading } = useSelector((states) => states.common);
 
   const dispatch = useDispatch();
 
@@ -23,7 +24,6 @@ function App() {
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
 
-;
 
   const onSignOut = () => {
     dispatch(signOut());
@@ -49,6 +49,7 @@ function App() {
           <Routes>
             <Route path={HOME_ROUTE} element={<HomePage />} />
             <Route path={LOGIN_ROUTE} element={<LoginPage />} />
+            <Route path={NEW_THREAD_ROUTE} element={<NewThreadPage />} />
             <Route path={REGISTER_ROUTE} element={<RegisterPage />} />
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>

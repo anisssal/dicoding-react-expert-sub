@@ -1,70 +1,14 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../data/network-api';
 
-const ActionType = {
-  RECEIVE_THREADS: 'RECEIVE_THREADS',
-  ADD_THREAD: 'ADD_THREAD',
-  TOGGLE_LIKE_THREAD: 'TOGGLE_LIKE_THREAD',
-};
-
-function receiveThreadsActionCreator(threads) {
-  return {
-    type: ActionType.RECEIVE_THREADS,
-    payload: {
-      threads,
-    },
-  };
-}
-
-function addThreadActionCreator(thread) {
-  return {
-    type: ActionType.ADD_THREAD,
-    payload: {
-      thread,
-    },
-  };
-}
-
-function toggleLikeThreadActionCreator({ threadId, userId }) {
-  return {
-    type: ActionType.TOGGLE_LIKE_THREAD,
-    payload: {
-      threadId,
-      userId,
-    },
-  };
-}
-
-function asyncAddThread({ text, replyTo = '' }) {
-  return async (dispatch) => {
+export const postThread = createAsyncThunk(
+  'auth/register',
+  async ({ title, body, category }, { rejectWithValue }) => {
     try {
-      const thread = await api.createThread({ text, replyTo });
-      dispatch(addThreadActionCreator(thread));
+      return await api.createThread({ title, body, category });
     } catch (error) {
-      alert(error.message);
+      return rejectWithValue(error.message);
     }
-  };
-}
-
-
-function asyncToogleLikeThread(threadId) {
-  return async (dispatch, getState) => {
-    const { authUser } = getState();
-    dispatch(toggleLikeThreadActionCreator({ threadId, userId: authUser.id }));
-
-    try {
-      await api.toggleLikeThread(threadId);
-    } catch (error) {
-      alert(error.message);
-      dispatch(toggleLikeThreadActionCreator({ threadId, userId: authUser.id }));
-    }
-  };
-}
-export {
-  ActionType,
-  receiveThreadsActionCreator,
-  addThreadActionCreator,
-  toggleLikeThreadActionCreator,
-  asyncAddThread,
-  asyncToogleLikeThread,
-};
+  }
+);
 

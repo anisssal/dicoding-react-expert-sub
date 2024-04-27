@@ -10,12 +10,12 @@ import {
   Typography,
 } from '@mui/material';
 import { red } from '@mui/material/colors';
-import PropTypes from 'prop-types';
 import parse from 'html-react-parser';
 import { Icon } from '@iconify/react';
+import PropTypes from "prop-types";
 import { postedAt } from '../../utils/index';
 import threadItemShape from '../../data/types/thread-item-shape';
-import ThreadAction from './ThreadAction.jsx';
+import ThreadAction from './ThreadAction';
 
 function ThreadCard({
   id,
@@ -24,13 +24,14 @@ function ThreadCard({
   category,
   createdAt,
   user,
-  authUser,
+  authUserId,
   upVotesBy,
   downVotesBy,
   totalComments,
+  onToggleDownVoted,
+  onToggleUpVoted,
+  onCommentsClick,
 }) {
-  const isUpVoted = upVotesBy.includes(authUser?.id);
-  const isDownVoted = downVotesBy.includes(authUser?.id);
   return (
     <Card sx={{ mt: 2 }}>
       <CardHeader
@@ -77,11 +78,17 @@ function ThreadCard({
           sx={{ width: '100%' }}
         >
           <Chip icon={<Icon icon="mdi:tag" />} label={category} />
-          <ThreadAction totalComments={totalComments} isUpVoted={isUpVoted} isDownVoted={isDownVoted}  />
+          <ThreadAction
+            id={id}
+            authUserId={authUserId}
+            totalComments={totalComments}
+            votedBy={upVotesBy}
+            downVotedBy={downVotesBy}
+            onToggleDownVoted={onToggleDownVoted}
+            onToggleUpVoted={onToggleUpVoted}
+            onCommentsClick={onCommentsClick}
+          />
         </Stack>
-
-        {/* <Icon icon="bxs:upvote" /> */}
-        {/* <Icon icon="bxs:downvote" /> */}
       </CardActions>
     </Card>
   );
@@ -89,6 +96,10 @@ function ThreadCard({
 
 ThreadCard.propTypes = {
   ...threadItemShape,
+    onToggleUpVoted : PropTypes.func.isRequired,
+    onToggleDownVoted : PropTypes.func.isRequired,
+    onCommentsClick : PropTypes.func.isRequired,
+
 };
 
 export default ThreadCard;

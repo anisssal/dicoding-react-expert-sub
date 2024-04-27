@@ -1,11 +1,11 @@
 import { Box, Card, Stack } from '@mui/material';
 import Link from '@mui/material/Link';
 import { useDispatch, useSelector } from 'react-redux';
-import LoginInput from '../components/input/LoginInput';
-import { REGISTER_ROUTE } from '../utils/route-name';
-import { loginUser } from '../store/auth/auth_action.js';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LoginInput from '../components/input/LoginInput';
+import { REGISTER_ROUTE } from '../utils/route-name';
+import { loginUser } from '../store/auth/auth_action';
 
 function LoginPage() {
   const dispatch = useDispatch();

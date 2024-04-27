@@ -40,5 +40,5 @@ export default function MobileDrawer({ isOpen, onClose, pages }) {
 MobileDrawer.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  pages: PropTypes.array,
+  pages: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };

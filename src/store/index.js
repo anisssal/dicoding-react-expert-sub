@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { loadingBarReducer } from 'react-redux-loading-bar';
 import authReducer from './auth/auth_slice';
+import commonReducer from './common/common_slice';
 import sharedReducer from './shared/shared_slice';
-import threadsReducer from './threads/reducer';
+import threadsReducer from './threads/threads_slice';
 import usersReducer from './users/reducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  common: commonReducer,
   shared: sharedReducer,
   users: usersReducer,
   threads: threadsReducer,

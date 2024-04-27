@@ -1,0 +1,27 @@
+#input-thread__body{
+  animation-duration: 10ms;
+  animation-name: mui-auto-fill-cancel;
+  background: none;
+  font-size: 1rem;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.00938em;
+  color: #212B36;
+  border-radius: 8px;
+  position: relative;
+  height: 100px;
+
+
+}
+
+[contenteditable] {
+  outline: 0px solid transparent;
+}
+
+
+[data-placeholder]:empty:before {
+  color: #6d6d6d;
+  content: attr(data-placeholder);
+}
+
+
