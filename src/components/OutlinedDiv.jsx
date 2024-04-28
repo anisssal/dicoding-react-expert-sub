@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Stack } from '@mui/material';
+import {Box, Stack} from '@mui/material';
 
 const borderColor = '#b2b2b2';
 const errorBorderColor = '#d32f2f';
@@ -45,8 +45,8 @@ const styles = {
 
 export default function OutlinedDiv({ children, label, error }) {
   return (
-    <Stack spacing={0.2} direction="column">
-      <div
+    <Stack spacing={0.2} direction="column" width="100%" sx={{ mb: 1.5 }}>
+      <Box
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -89,7 +89,7 @@ export default function OutlinedDiv({ children, label, error }) {
           />
         </div>
         <div style={styles.childrenContainer}>{children}</div>
-      </div>
+      </Box>
       {!!error && (
         <p
           className="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained"

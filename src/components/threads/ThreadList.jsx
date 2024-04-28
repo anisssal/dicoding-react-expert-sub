@@ -11,7 +11,7 @@ export default function ThreadList({
   onCommentsClick,
 }) {
   return (
-    <Box sx={{ my: 3 }}>
+    <Box sx={{ my: { xs: 1, md: 3 } }}>
       {threads.map((thread) => (
         <ThreadCard
           key={thread.id}

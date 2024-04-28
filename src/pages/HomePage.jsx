@@ -36,8 +36,8 @@ export default function HomePage() {
 
   return (
     <Grid container>
-      <Grid item sm={3}/>
-      <Grid item sm={6}>
+      <Grid item sm={0} md={3} />
+      <Grid item sm={12} md={7} sx={{ px: { xs: 2, md: 0 } }}>
         <ThreadList
           authUserId={authUser?.id}
           threads={threadsData}

@@ -1,4 +1,4 @@
-#input-thread__body{
+.contentEditableInput{
   animation-duration: 10ms;
   animation-name: mui-auto-fill-cancel;
   background: none;
@@ -9,9 +9,11 @@
   color: #212B36;
   border-radius: 8px;
   position: relative;
-  height: 100px;
+  min-height: 100px;
+}
 
-
+#input-comment{
+  min-height: 50px;
 }
 
 [contenteditable] {

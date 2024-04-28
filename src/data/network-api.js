@@ -189,10 +189,10 @@ const api = (() => {
     }
 
     const {
-      data: { talk },
+      data: { comment },
     } = responseJson;
 
-    return talk;
+    return comment;
   }
 
   async function upVoteThread(id) {

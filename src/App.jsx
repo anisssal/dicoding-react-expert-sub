@@ -11,8 +11,9 @@ import { signOut } from './store/auth/auth_slice';
 import BackdropLoader from './components/BackdropLoader';
 import NotFoundPage from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
-import {HOME_ROUTE, LOGIN_ROUTE, NEW_THREAD_ROUTE, REGISTER_ROUTE} from "./utils/route-name";
+import {DETAIL_THREAD_ROUTE, HOME_ROUTE, LOGIN_ROUTE, NEW_THREAD_ROUTE, REGISTER_ROUTE} from "./utils/route-name";
 import NewThreadPage from "./pages/NewThreadPage";
+import DetailThreadPage from "./pages/DetailThreadPage";
 
 function App() {
   const { authUser } = useSelector((states) => states.auth);
@@ -51,6 +52,7 @@ function App() {
             <Route path={LOGIN_ROUTE} element={<LoginPage />} />
             <Route path={NEW_THREAD_ROUTE} element={<NewThreadPage />} />
             <Route path={REGISTER_ROUTE} element={<RegisterPage />} />
+            <Route path={`${DETAIL_THREAD_ROUTE}/:id`} element={<DetailThreadPage />} />
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>
         </Box>

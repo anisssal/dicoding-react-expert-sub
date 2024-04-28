@@ -68,7 +68,6 @@ export const asyncToggleDownVotedThread = createAsyncThunk(
       if (isUpVoted) {
         dispatch(toggleUpVoteThread({ id, authUserId }));
       }
-
       return rejectWithValue(error.message);
     }
   }
