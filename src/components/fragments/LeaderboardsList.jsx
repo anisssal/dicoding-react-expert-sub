@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Paper} from '@mui/material';
+import { Paper } from '@mui/material';
 import leaderboardShape from '../../data/types/leaderboard-shape';
 import LeaderboardItem from '../LeaderboardItem';
 

@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toastError, toastSuccess } from '../../utils/toast';
-import {asyncPostThread, asyncToggleDownVotedThread, asyncToggleUpVotedThread} from './action';
+import { asyncPostThread, asyncToggleDownVotedThread, asyncToggleUpVotedThread } from './action';
 
 const initialState = {
   threads: [],
-  filterCategory : null,
+  filterCategory: null,
   postThreadLoading: false,
   postThreadSuccess: false,
 };
@@ -19,13 +19,13 @@ const threadsSlice = createSlice({
       state.postThreadLoading = false;
       state.postThreadSuccess = false;
     },
-    setFilterCategory : (state, action) => {
+    setFilterCategory: (state, action) => {
       if (state.filterCategory && state.filterCategory === action.payload) {
         state.filterCategory = null;
-      }else{
+      } else {
         state.filterCategory = action.payload;
       }
-    } ,
+    },
     toggleUpVoteThread: (state, action) => {
       const { id, authUserId } = action.payload;
       const threadIndex = state.threads.findIndex((t) => t.id === id);
@@ -72,12 +72,6 @@ const threadsSlice = createSlice({
     });
   },
 });
-export const {
-  receiveThreads,
-  resetPostThread,
-  toggleUpVoteThread,
-  toggleDownVoteThread,
-  setFilterCategory
-} = threadsSlice.actions;
+export const { receiveThreads, resetPostThread, toggleUpVoteThread, toggleDownVoteThread, setFilterCategory } = threadsSlice.actions;
 
 export default threadsSlice.reducer;

@@ -7,12 +7,9 @@ const sharedSlice = createSlice({
   name: 'shared',
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(
-      asyncPopulateUsersAndThreads.rejected,
-      (state, { payload }) => {
-        toastError(payload);
-      }
-    );
+    builder.addCase(asyncPopulateUsersAndThreads.rejected, (state, { payload }) => {
+      toastError(payload);
+    });
   },
 });
 

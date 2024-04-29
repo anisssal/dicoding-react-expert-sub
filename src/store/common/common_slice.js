@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {asyncPreloadProcess} from "./common_action";
+import { asyncPreloadProcess } from './common_action';
 
 const initialState = {
   isPreload: true,
@@ -14,7 +14,7 @@ const commonSlice = createSlice({
     },
     hideGlobalLoading: (state, _action) => {
       state.globalLoading = false;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(asyncPreloadProcess.fulfilled, (state) => {
@@ -26,6 +26,5 @@ const commonSlice = createSlice({
   },
 });
 export const { showGlobalLoading, hideGlobalLoading } = commonSlice.actions;
-
 
 export default commonSlice.reducer;

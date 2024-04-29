@@ -6,18 +6,7 @@ import DownVoteButton from '../action/DownVoteButton';
 import { postedAt } from '../../utils/index';
 import commentItemShape from '../../data/types/comment-item-shape';
 
-export default function CommentItem({
-  id,
-  content,
-  upVotesBy,
-  downVotesBy,
-  createdAt,
-  owner,
-  authUserId,
-  onToggleUpVoted,
-  onToggleDownVoted,
-  isLastItem,
-}) {
+export default function CommentItem({ id, content, upVotesBy, downVotesBy, createdAt, owner, authUserId, onToggleUpVoted, onToggleDownVoted, isLastItem }) {
   const isUpVoted = upVotesBy.includes(authUserId);
   const isDownVoted = downVotesBy.includes(authUserId);
 
@@ -57,23 +46,11 @@ export default function CommentItem({
       >
         {parse(content)}
       </Typography>
-      <Stack
-        direction="row"
-        justifyContent="flex-end"
-        sx={{ width: '100%', mb: 1 }}
-      >
+      <Stack direction="row" justifyContent="flex-end" sx={{ width: '100%', mb: 1 }}>
         <Stack direction="row" spacing={1.2}>
-          <UpVoteButton
-            isUpVoted={isUpVoted}
-            onUpvoteClick={() => onUpvoteClick()}
-            totalVote={upVotesBy.length}
-          />
+          <UpVoteButton isUpVoted={isUpVoted} onUpvoteClick={() => onUpvoteClick()} totalVote={upVotesBy.length} />
 
-          <DownVoteButton
-            isDownVoted={isDownVoted}
-            onDownVoteClick={() => onDownVoteClick()}
-            totalVote={downVotesBy.length}
-          />
+          <DownVoteButton isDownVoted={isDownVoted} onDownVoteClick={() => onDownVoteClick()} totalVote={downVotesBy.length} />
         </Stack>
       </Stack>
       {!isLastItem && <Divider variant="middle" />}

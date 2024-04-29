@@ -7,7 +7,6 @@ import threadsReducer from './threads/threads_slice';
 import detailThreadReducer from './detail_thread/detail_thread_slice';
 import usersReducer from './users/users_slice';
 
-
 const rootReducer = combineReducers({
   auth: authReducer,
   common: commonReducer,

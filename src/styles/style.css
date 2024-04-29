@@ -1,18 +1,18 @@
-.content-editable-input{
+.content-editable-input {
   animation-duration: 10ms;
   animation-name: mui-auto-fill-cancel;
   background: none;
   font-size: 1rem;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 400;
   letter-spacing: 0.00938em;
-  color: #212B36;
+  color: #212b36;
   border-radius: 8px;
   position: relative;
   min-height: 100px;
 }
 
-.btn-auth-wrapper{
+.btn-auth-wrapper {
   background: none;
   color: inherit;
   border: none;
@@ -22,7 +22,7 @@
   outline: inherit;
 }
 
-#input-comment{
+#input-comment {
   min-height: 50px;
 }
 
@@ -30,10 +30,7 @@
   outline: 0px solid transparent;
 }
 
-
 [data-placeholder]:empty:before {
   color: #6d6d6d;
   content: attr(data-placeholder);
 }
-
-

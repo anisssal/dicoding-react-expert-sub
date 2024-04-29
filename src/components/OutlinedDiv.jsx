@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {Box, Stack} from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 const borderColor = '#b2b2b2';
 const errorBorderColor = '#d32f2f';
@@ -91,9 +91,7 @@ export default function OutlinedDiv({ children, label, error }) {
         <div style={styles.childrenContainer}>{children}</div>
       </Box>
       {!!error && (
-        <p
-          className="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained"
-          style={styles.errorTextStyle}>
+        <p className="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained" style={styles.errorTextStyle}>
           {error}
         </p>
       )}

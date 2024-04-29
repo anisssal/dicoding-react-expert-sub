@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import localData from '../../data/local-data';
-import {loginUser, registerUser} from './auth_action';
+import { loginUser, registerUser } from './auth_action';
 import { toastError } from '../../utils/toast';
 
 const initialState = {
   authUser: null,
   loginLoading: false,
   loginSuccess: false,
-  registerLoading :false,
+  registerLoading: false,
   registerSuccess: false,
 };
 const authSlice = createSlice({

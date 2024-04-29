@@ -22,11 +22,7 @@ function LoginPage() {
 
   return (
     <Box>
-      <Stack
-        alignItems="center"
-        justifyContent="center"
-        sx={{ height: 1, margin: 1 }}
-      >
+      <Stack alignItems="center" justifyContent="center" sx={{ height: 1, margin: 1 }}>
         <Card sx={{ p: 5, margin: 10, width: 1, maxWidth: 420 }}>
           <Stack spacing={2}>
             <h2>Login</h2>
@@ -40,7 +36,7 @@ function LoginPage() {
 
             <p>
               Don&apos;t have an account?
-              <Link href={REGISTER_ROUTE} underline="none" >
+              <Link href={REGISTER_ROUTE} underline="none">
                 Register
               </Link>
             </p>

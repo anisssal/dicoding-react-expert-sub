@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { alpha } from '@mui/material/styles';
-import {  ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import PropTypes from 'prop-types';
 import usePathname from '../../hooks/usePathname';
 
@@ -29,11 +29,8 @@ export default function DrawerNavItem({ title, icon, path }) {
         }),
       }}
     >
-      <ListItemIcon sx={{ ...(active && { color: 'primary.main' }) }}>
-        {icon}
-      </ListItemIcon>
+      <ListItemIcon sx={{ ...(active && { color: 'primary.main' }) }}>{icon}</ListItemIcon>
       <ListItemText primary={title} />
-
     </ListItemButton>
   );
 }

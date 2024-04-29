@@ -19,7 +19,7 @@ export default function DownVoteButton({ isDownVoted, onDownVoteClick, totalVote
   return (
     <Stack direction="row" alignItems="center">
       <IconButton disableRipple onClick={() => onBtnClick()}>
-        <Icon icon={isDownVoted ? 'bxs:downvote' : 'bx:downvote'} width="20px" height="20px"  />
+        <Icon icon={isDownVoted ? 'bxs:downvote' : 'bx:downvote'} width="20px" height="20px" />
       </IconButton>
       <Typography variant="subtitle" color="text.secondary">
         {totalVote}
@@ -27,7 +27,6 @@ export default function DownVoteButton({ isDownVoted, onDownVoteClick, totalVote
     </Stack>
   );
 }
-
 
 DownVoteButton.propTypes = {
   isDownVoted: PropTypes.bool.isRequired,

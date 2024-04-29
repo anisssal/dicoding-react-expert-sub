@@ -9,19 +9,12 @@ import { asyncPreloadProcess } from './store/common/common_action';
 import LoginPage from './pages/LoginPage';
 import { signOut } from './store/auth/auth_slice';
 import BackdropLoader from './components/BackdropLoader';
-import NotFoundPage from "./pages/NotFoundPage";
-import RegisterPage from "./pages/RegisterPage";
-import {
-  DETAIL_THREAD_ROUTE,
-  HOME_ROUTE,
-  LEADERBOARDS_ROUTE,
-  LOGIN_ROUTE,
-  NEW_THREAD_ROUTE,
-  REGISTER_ROUTE
-} from "./utils/route-name";
-import NewThreadPage from "./pages/NewThreadPage";
-import DetailThreadPage from "./pages/DetailThreadPage";
-import LeaderboardsPage from "./pages/LeaderboardsPage";
+import NotFoundPage from './pages/NotFoundPage';
+import RegisterPage from './pages/RegisterPage';
+import { DETAIL_THREAD_ROUTE, HOME_ROUTE, LEADERBOARDS_ROUTE, LOGIN_ROUTE, NEW_THREAD_ROUTE, REGISTER_ROUTE } from './utils/route-name';
+import NewThreadPage from './pages/NewThreadPage';
+import DetailThreadPage from './pages/DetailThreadPage';
+import LeaderboardsPage from './pages/LeaderboardsPage';
 
 function App() {
   const { authUser } = useSelector((states) => states.auth);
@@ -32,7 +25,6 @@ function App() {
   useEffect(() => {
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
-
 
   const onSignOut = () => {
     dispatch(signOut());
@@ -46,13 +38,7 @@ function App() {
     <Box sx={{ display: 'flex' }}>
       <BackdropLoader loading={globalLoading} />
       <MyAppBar user={authUser} onSignOut={onSignOut} />
-      <Box
-        component="main"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-        minWidth="100%"
-      >
+      <Box component="main" justifyContent="center" alignItems="center" minHeight="100vh" minWidth="100%">
         <Toolbar />
         <Box flex={1}>
           <Routes>

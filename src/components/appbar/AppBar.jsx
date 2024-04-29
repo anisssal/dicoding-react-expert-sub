@@ -47,18 +47,10 @@ function MyAppBar({ user, onSignOut }) {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: displayOnlyShowOnMobile }}>
-            <IconButton
-              size="medium"
-              onClick={handleMobileNavOpen}
-              color={grey[900]}
-            >
+            <IconButton size="medium" onClick={handleMobileNavOpen} color={grey[900]}>
               <MenuIcon />
             </IconButton>
-            <MobileDrawer
-              isOpen={mobileNavOpen}
-              onClose={handleCloseMobileNav}
-              pages={navPages}
-            />
+            <MobileDrawer isOpen={mobileNavOpen} onClose={handleCloseMobileNav} pages={navPages} />
           </Box>
           <ForumIcon
             sx={{

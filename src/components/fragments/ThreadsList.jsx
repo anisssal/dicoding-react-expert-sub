@@ -3,12 +3,7 @@ import { Box } from '@mui/material';
 import ThreadCard from '../threads/ThreadCard';
 import threadItemShape from '../../data/types/thread-item-shape';
 
-export default function ThreadsList({
-  threads,
-  authUserId,
-  onToggleDownVoted,
-  onToggleUpVoted,
-}) {
+export default function ThreadsList({ threads, authUserId, onToggleDownVoted, onToggleUpVoted }) {
   return (
     <Box sx={{ my: { xs: 1, md: 3 } }}>
       {threads.map((thread) => (

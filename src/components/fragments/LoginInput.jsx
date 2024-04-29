@@ -48,14 +48,7 @@ function LoginInput({ onLoginSubmitted, loading }) {
   return (
     <form onSubmit={onSubmitHandler}>
       <Stack spacing={3}>
-        <TextField
-          name="email"
-          label="Email"
-          value={email}
-          onChange={setEmail}
-          error={!!errorEmail}
-          helperText={errorEmail}
-        />
+        <TextField name="email" label="Email" value={email} onChange={setEmail} error={!!errorEmail} helperText={errorEmail} />
         <TextField
           name="password"
           label="Password"
@@ -67,10 +60,7 @@ function LoginInput({ onLoginSubmitted, loading }) {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton
-                  onClick={() => setShowPassword(!showPassword)}
-                  edge="end"
-                >
+                <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
                   {showPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
                 </IconButton>
               </InputAdornment>
@@ -78,15 +68,7 @@ function LoginInput({ onLoginSubmitted, loading }) {
           }}
         />
 
-        <LoadingButton
-          loading={loading}
-          sx={{ mt: 4 }}
-          fullWidth
-          size="large"
-          type="submit"
-          variant="contained"
-          color="primary"
-        >
+        <LoadingButton loading={loading} sx={{ mt: 4 }} fullWidth size="large" type="submit" variant="contained" color="primary">
           Login
         </LoadingButton>
       </Stack>

@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {toastError} from "../../utils/toast";
-import {asyncPopulateLeaderboard} from "./action";
+import { toastError } from '../../utils/toast';
+import { asyncPopulateLeaderboard } from './action';
 
 const initialState = {
   users: [],
-  leaderboards : []
+  leaderboards: [],
 };
 const usersSlice = createSlice({
   name: 'users',
@@ -13,19 +13,16 @@ const usersSlice = createSlice({
     receiveUsers: (state, action) => {
       state.users = action.payload;
     },
-    receiveUserLeaderboards : (state,action) => {
+    receiveUserLeaderboards: (state, action) => {
       state.leaderboards = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(
-        asyncPopulateLeaderboard.rejected,
-        (state, { payload }) => {
-          toastError(payload);
-        }
-    );
-  }
+    builder.addCase(asyncPopulateLeaderboard.rejected, (state, { payload }) => {
+      toastError(payload);
+    });
+  },
 });
 
-export const { receiveUsers,receiveUserLeaderboards } = usersSlice.actions;
+export const { receiveUsers, receiveUserLeaderboards } = usersSlice.actions;
 export default usersSlice.reducer;

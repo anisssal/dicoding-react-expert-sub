@@ -1,10 +1,9 @@
-import PropTypes from "prop-types";
-import userShape from "./user-shape";
+import PropTypes from 'prop-types';
+import userShape from './user-shape';
 
 const leaderboardShape = {
-    user: PropTypes.shape(userShape).isRequired,
-    score:  PropTypes.number.isRequired,
+  user: PropTypes.shape(userShape).isRequired,
+  score: PropTypes.number.isRequired,
 };
-
 
 export default leaderboardShape;

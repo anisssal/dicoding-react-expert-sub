@@ -1,5 +1,5 @@
 module.exports = {
-    rules: {
-        "import/no-cycle": "off"
-    },
+  rules: {
+    'import/no-cycle': 'off',
+  },
 };

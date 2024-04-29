@@ -31,9 +31,7 @@ const detailThreadSlice = createSlice({
       if (!isUpVoted) {
         state.thread.upVotesBy.push(authUserId);
       } else {
-        state.thread.upVotesBy = state.thread.upVotesBy.filter(
-          (t) => t !== authUserId
-        );
+        state.thread.upVotesBy = state.thread.upVotesBy.filter((t) => t !== authUserId);
       }
     },
     toggleDownVoteThreadDetail: (state, action) => {
@@ -42,17 +40,13 @@ const detailThreadSlice = createSlice({
       if (!isDownVoted) {
         state.thread.downVotesBy.push(authUserId);
       } else {
-        state.thread.downVotesBy = state.thread.downVotesBy.filter(
-          (t) => t !== authUserId
-        );
+        state.thread.downVotesBy = state.thread.downVotesBy.filter((t) => t !== authUserId);
       }
     },
 
     toggleUpVoteComment: (state, action) => {
       const { commentId, authUserId } = action.payload;
-      const commentIndex = state.thread.comments.findIndex(
-        (t) => t.id === commentId
-      );
+      const commentIndex = state.thread.comments.findIndex((t) => t.id === commentId);
       const comment = state.thread.comments[commentIndex];
       const isUpVoted = comment.upVotesBy.includes(authUserId);
 
@@ -64,17 +58,13 @@ const detailThreadSlice = createSlice({
     },
     toggleDownVoteComment: (state, action) => {
       const { commentId, authUserId } = action.payload;
-      const commentIndex = state.thread.comments.findIndex(
-        (c) => c.id === commentId
-      );
+      const commentIndex = state.thread.comments.findIndex((c) => c.id === commentId);
       const comment = state.thread.comments[commentIndex];
       const isDownVoted = comment.downVotesBy.includes(authUserId);
       if (!isDownVoted) {
         comment.downVotesBy.push(authUserId);
       } else {
-        comment.downVotesBy = comment.downVotesBy.filter(
-          (t) => t !== authUserId
-        );
+        comment.downVotesBy = comment.downVotesBy.filter((t) => t !== authUserId);
       }
     },
   },
@@ -97,42 +87,24 @@ const detailThreadSlice = createSlice({
       toastError(payload);
       state.getDetailThreadError = true;
     });
-    builder.addCase(
-      asyncToggleUpVotedThreadDetail.rejected,
-      (state, { payload }) => {
-        toastError(payload);
-      }
-    );
-    builder.addCase(
-      asyncToggleDownVotedThreadDetail.rejected,
-      (state, { payload }) => {
-        toastError(payload);
-      }
-    );
+    builder.addCase(asyncToggleUpVotedThreadDetail.rejected, (state, { payload }) => {
+      toastError(payload);
+    });
+    builder.addCase(asyncToggleDownVotedThreadDetail.rejected, (state, { payload }) => {
+      toastError(payload);
+    });
 
     builder.addCase(asyncPostCommentThread.rejected, (state, { payload }) => {
       toastError(payload);
     });
-    builder.addCase(
-      asyncToggleUpVotedThreadComment.rejected,
-      (state, { payload }) => {
-        toastError(payload);
-      }
-    );
-    builder.addCase(
-      asyncToggleDownVotedThreadComment.rejected,
-      (state, { payload }) => {
-        toastError(payload);
-      }
-    );
+    builder.addCase(asyncToggleUpVotedThreadComment.rejected, (state, { payload }) => {
+      toastError(payload);
+    });
+    builder.addCase(asyncToggleDownVotedThreadComment.rejected, (state, { payload }) => {
+      toastError(payload);
+    });
   },
 });
-export const {
-  toggleDownVoteThreadDetail,
-  resetDetailThreadState,
-  toggleUpVoteThreadDetail,
-  toggleDownVoteComment,
-  toggleUpVoteComment,
-} = detailThreadSlice.actions;
+export const { toggleDownVoteThreadDetail, resetDetailThreadState, toggleUpVoteThreadDetail, toggleDownVoteComment, toggleUpVoteComment } = detailThreadSlice.actions;
 
 export default detailThreadSlice.reducer;

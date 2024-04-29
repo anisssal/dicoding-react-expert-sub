@@ -1,9 +1,9 @@
-import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
 
 function useSearchKeyword() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [keyword, setKeyword] = useState(() => searchParams.get("keyword") || "");
+  const [keyword, setKeyword] = useState(() => searchParams.get('keyword') || '');
 
   function onKeywordChange(nKeyword) {
     setKeyword(nKeyword);

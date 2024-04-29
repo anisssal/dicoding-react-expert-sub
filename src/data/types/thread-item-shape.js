@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import userShape from "./user-shape";
+import userShape from './user-shape';
 
 const threadItemShape = {
   id: PropTypes.string.isRequired,

@@ -6,17 +6,15 @@ import { useEffect } from 'react';
 import { LOGIN_ROUTE } from '../utils/route-name';
 import RegisterInput from '../components/fragments/RegisterInput';
 import { toastSuccess } from '../utils/toast';
-import {registerUser} from "../store/auth/auth_action";
+import { registerUser } from '../store/auth/auth_action';
 
 function RegisterPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { registerLoading, registerSuccess } = useSelector(
-    (states) => states.auth
-  );
+  const { registerLoading, registerSuccess } = useSelector((states) => states.auth);
 
   async function onRegister({ name, email, password }) {
-    dispatch(registerUser({ name, email, password }))
+    dispatch(registerUser({ name, email, password }));
   }
 
   useEffect(() => {
@@ -27,11 +25,7 @@ function RegisterPage() {
 
   return (
     <section>
-      <Stack
-        alignItems="center"
-        justifyContent="center"
-        sx={{ height: 1, margin: 1 }}
-      >
+      <Stack alignItems="center" justifyContent="center" sx={{ height: 1, margin: 1 }}>
         <Card
           sx={{
             p: 5,
@@ -42,12 +36,7 @@ function RegisterPage() {
         >
           <Stack spacing={2}>
             <h2>Register New User</h2>
-            <RegisterInput
-              onRegisterSubmitted={({ name, email, password }) =>
-                onRegister({ name, email, password })
-              }
-              loading={registerLoading}
-            />
+            <RegisterInput onRegisterSubmitted={({ name, email, password }) => onRegister({ name, email, password })} loading={registerLoading} />
             <p>
               Already have an account?
               <Link href={LOGIN_ROUTE} underline="none">
