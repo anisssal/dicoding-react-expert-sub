@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { toastError, toastSuccess } from '../../utils/toast';
+import { toastError } from '../../utils/toast';
 import {
   asyncGetDetailThread,
   asyncPostCommentThread,
+  asyncToggleDownVotedThreadComment,
   asyncToggleDownVotedThreadDetail,
+  asyncToggleUpVotedThreadComment,
   asyncToggleUpVotedThreadDetail,
 } from './action';
 
@@ -46,27 +48,33 @@ const detailThreadSlice = createSlice({
       }
     },
 
-    toggleUpVoteComments: (state, action) => {
-      const { commentsId, authUserId } = action.payload;
-      const threadIndex = state.threads.findIndex((t) => t.id === commentsId);
-      const thread = state.threads[threadIndex];
-      const isUpVoted = thread.upVotesBy.includes(authUserId);
+    toggleUpVoteComment: (state, action) => {
+      const { commentId, authUserId } = action.payload;
+      const commentIndex = state.thread.comments.findIndex(
+        (t) => t.id === commentId
+      );
+      const comment = state.thread.comments[commentIndex];
+      const isUpVoted = comment.upVotesBy.includes(authUserId);
 
       if (!isUpVoted) {
-        thread.upVotesBy.push(authUserId);
+        comment.upVotesBy.push(authUserId);
       } else {
-        thread.upVotesBy = thread.upVotesBy.filter((t) => t !== authUserId);
+        comment.upVotesBy = comment.upVotesBy.filter((t) => t !== authUserId);
       }
     },
-    toggleDownVoteComments: (state, action) => {
-      const { id, authUserId } = action.payload;
-      const threadIndex = state.threads.findIndex((t) => t.id === id);
-      const thread = state.threads[threadIndex];
-      const isDownVoted = thread.downVotesBy.includes(authUserId);
+    toggleDownVoteComment: (state, action) => {
+      const { commentId, authUserId } = action.payload;
+      const commentIndex = state.thread.comments.findIndex(
+        (c) => c.id === commentId
+      );
+      const comment = state.thread.comments[commentIndex];
+      const isDownVoted = comment.downVotesBy.includes(authUserId);
       if (!isDownVoted) {
-        thread.downVotesBy.push(authUserId);
+        comment.downVotesBy.push(authUserId);
       } else {
-        thread.downVotesBy = thread.downVotesBy.filter((t) => t !== authUserId);
+        comment.downVotesBy = comment.downVotesBy.filter(
+          (t) => t !== authUserId
+        );
       }
     },
   },
@@ -74,6 +82,7 @@ const detailThreadSlice = createSlice({
     builder.addCase(asyncGetDetailThread.fulfilled, (state, { payload }) => {
       state.thread = payload;
     });
+
     builder.addCase(asyncPostCommentThread.pending, (state) => {
       state.postCommentSuccess = false;
       state.postCommentLoading = true;
@@ -82,7 +91,6 @@ const detailThreadSlice = createSlice({
       state.thread.comments.unshift(payload);
       state.postCommentSuccess = true;
       state.postCommentLoading = false;
-      toastSuccess('Success submitting comment!');
     });
 
     builder.addCase(asyncGetDetailThread.rejected, (state, { payload }) => {
@@ -101,17 +109,30 @@ const detailThreadSlice = createSlice({
         toastError(payload);
       }
     );
+
     builder.addCase(asyncPostCommentThread.rejected, (state, { payload }) => {
       toastError(payload);
     });
+    builder.addCase(
+      asyncToggleUpVotedThreadComment.rejected,
+      (state, { payload }) => {
+        toastError(payload);
+      }
+    );
+    builder.addCase(
+      asyncToggleDownVotedThreadComment.rejected,
+      (state, { payload }) => {
+        toastError(payload);
+      }
+    );
   },
 });
 export const {
-  toggleDownVoteComments,
-  toggleUpVoteComments,
-  toggleUpVoteThreadDetail,
   toggleDownVoteThreadDetail,
   resetDetailThreadState,
+  toggleUpVoteThreadDetail,
+  toggleDownVoteComment,
+  toggleUpVoteComment,
 } = detailThreadSlice.actions;
 
 export default detailThreadSlice.reducer;

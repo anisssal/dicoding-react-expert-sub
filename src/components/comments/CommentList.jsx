@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Stack, Typography} from '@mui/material';
-import CommentCard from './CommentCard';
+import CommentItem from './CommentItem';
 import commentItemShape from '../../data/types/comment-item-shape';
 
 export default function CommentList({
@@ -15,10 +15,10 @@ export default function CommentList({
         {`${comments.length} Comment${comments.length > 1 ? 's' : ''}`}{' '}
       </Typography>
       {comments.map((comment,index) => (
-        <CommentCard
+        <CommentItem
           key={comment.id}
           id={comment.id}
-          user={comment.owner}
+          owner={comment.owner}
           createdAt={comment.createdAt}
           content={comment.content}
           authUserId={authUserId}

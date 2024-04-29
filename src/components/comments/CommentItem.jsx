@@ -1,18 +1,18 @@
 import { Avatar, Box, Divider, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
-import UpVoteButton from '../threads/action/UpVoteButton';
-import DownVoteButton from '../threads/action/DownVoteButton';
+import UpVoteButton from '../action/UpVoteButton';
+import DownVoteButton from '../action/DownVoteButton';
 import { postedAt } from '../../utils/index';
 import commentItemShape from '../../data/types/comment-item-shape';
 
-export default function CommentCard({
+export default function CommentItem({
   id,
   content,
   upVotesBy,
   downVotesBy,
   createdAt,
-  user,
+  owner,
   authUserId,
   onToggleUpVoted,
   onToggleDownVoted,
@@ -32,9 +32,9 @@ export default function CommentCard({
   return (
     <Stack sx={{ pl: '16px', pt: '16px' }} direction="column">
       <Stack direction="row" justifyItems="center" alignItems="center">
-        <Avatar aria-label="user-avatar" src={user?.avatar} sx={{ mr: 1 }} />
+        <Avatar aria-label="user-avatar" src={owner?.avatar} sx={{ mr: 1 }} />
         <Typography variant="subtitle1" sx={{ mr: 0.5 }}>
-          {user.name}
+          {owner.name}
         </Typography>
         <Box component="span" sx={{ display: 'inline', mr: 0.5 }}>
           &#x2022;
@@ -80,7 +80,7 @@ export default function CommentCard({
     </Stack>
   );
 }
-CommentCard.propTypes = {
+CommentItem.propTypes = {
   ...commentItemShape,
   authUserId: PropTypes.string.isRequired,
   onToggleUpVoted: PropTypes.func.isRequired,

@@ -1,4 +1,4 @@
-.contentEditableInput{
+.content-editable-input{
   animation-duration: 10ms;
   animation-name: mui-auto-fill-cancel;
   background: none;
@@ -10,6 +10,16 @@
   border-radius: 8px;
   position: relative;
   min-height: 100px;
+}
+
+.btn-auth-wrapper{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 #input-comment{

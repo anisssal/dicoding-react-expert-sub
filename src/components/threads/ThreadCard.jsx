@@ -15,8 +15,8 @@ import Link from '@mui/material/Link';
 import threadItemShape from '../../data/types/thread-item-shape';
 import { DETAIL_THREAD_ROUTE } from '../../utils/route-name';
 import ThreadCardHeader from './ThreadCardHeader';
-import UpVoteButton from './action/UpVoteButton';
-import DownVoteButton from './action/DownVoteButton';
+import UpVoteButton from '../action/UpVoteButton';
+import DownVoteButton from '../action/DownVoteButton';
 import ThreadTag from "./ThreadTag";
 
 function ThreadCard({

@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../data/network-api';
 import { hideGlobalLoading, showGlobalLoading } from '../common/common_slice';
 import {
-  toggleDownVoteThreadDetail,
-  toggleUpVoteThreadDetail,
+    toggleDownVoteThreadDetail, toggleUpVoteComment,
+    toggleUpVoteThreadDetail, toggleDownVoteComment
 } from './detail_thread_slice';
 
 export const asyncGetDetailThread = createAsyncThunk(
@@ -88,3 +88,74 @@ export const asyncPostCommentThread = createAsyncThunk(
     }
   }
 );
+
+
+export const asyncToggleUpVotedThreadComment = createAsyncThunk(
+    'threadDetail/comment/upVote',
+    async ({ commentId, authUserId }, { dispatch, getState, rejectWithValue }) => {
+
+        try{
+
+            const {  thread } = getState().detailThread;
+
+            const comment = thread.comments.find((c) => c.id === commentId);
+            const isUpVoted = comment.upVotesBy.includes(authUserId);
+            const isDownVoted = comment.downVotesBy.includes(authUserId);
+            try {
+                dispatch(toggleUpVoteComment({ commentId, authUserId }));
+                if (isDownVoted) {
+                    dispatch(toggleDownVoteComment({ commentId, authUserId }));
+                }
+
+                if (!isUpVoted) {
+                    await api.upVoteThreadComment({threadId : thread.id, commentId});
+                } else {
+                    await api.neutralVoteThreadComment({threadId : thread.id, commentId});
+                }
+                return null;
+            } catch (error) {
+                dispatch(toggleUpVoteComment({ commentId, authUserId }));
+                if (isDownVoted) {
+                    dispatch(toggleDownVoteComment({ commentId, authUserId }));
+                }
+                return rejectWithValue(error.message);
+            }
+        }catch (error){
+            console.log("error ", error)
+
+        }
+
+    }
+);
+
+export const asyncToggleDownVotedThreadComment = createAsyncThunk(
+    'threadDetail/comment/downVote',
+    async ({ commentId, authUserId }, { dispatch, getState, rejectWithValue }) => {
+
+        const { thread } = getState().detailThread;
+        const comment = thread.comments.find((c) => c.id === commentId);
+
+        const isUpVoted = comment.upVotesBy.includes(authUserId);
+        const isDownVoted = comment.downVotesBy.includes(authUserId);
+        try {
+            dispatch(toggleDownVoteComment({ commentId, authUserId }));
+            if (isUpVoted) {
+                dispatch(toggleUpVoteComment({ commentId, authUserId }));
+            }
+
+            if (!isDownVoted) {
+                await api.downVoteThreadComment({threadId : thread.id, commentId});
+            } else {
+                await api.neutralVoteThreadComment({threadId : thread.id, commentId});
+            }
+            return null;
+        } catch (error) {
+            dispatch(toggleDownVoteComment({ commentId, authUserId }));
+            if (isUpVoted) {
+                dispatch(toggleUpVoteComment({ commentId, authUserId }));
+            }
+            return rejectWithValue(error.message);
+        }
+    }
+);
+

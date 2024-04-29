@@ -62,7 +62,7 @@ function NewThreadInput({ onThreadSubmitted, loading }) {
         <OutlinedDiv label="Content" error={errorBody}>
           <div
               id="input-thread__body"
-              className="contentEditableInput"
+              className="content-editable-input"
               onInput={onBodyChange}
               contentEditable
               data-placeholder="Input your content here"

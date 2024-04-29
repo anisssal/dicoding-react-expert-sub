@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toastError, toastSuccess } from '../../utils/toast';
-import { asyncPostThread, asyncToggleUpVotedThread } from './action';
+import {asyncPostThread, asyncToggleDownVotedThread, asyncToggleUpVotedThread} from './action';
 
 const initialState = {
   threads: [],
@@ -57,6 +57,9 @@ const threadsSlice = createSlice({
       toastError(payload);
     });
     builder.addCase(asyncToggleUpVotedThread.rejected, (state, { payload }) => {
+      toastError(payload);
+    });
+    builder.addCase(asyncToggleDownVotedThread.rejected, (state, { payload }) => {
       toastError(payload);
     });
   },
