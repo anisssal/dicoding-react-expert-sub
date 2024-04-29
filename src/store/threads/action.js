@@ -17,7 +17,7 @@ export const asyncPostThread = createAsyncThunk(
 export const asyncToggleUpVotedThread = createAsyncThunk(
   'thread/upVote',
   async ({ id, authUserId }, { dispatch, getState, rejectWithValue }) => {
-    const threadsState = getState().threads;
+    const threadsState = getState().leaderboards;
     const thread = threadsState.threads.find((t) => t.id === id);
     const isUpVoted = thread.upVotesBy.includes(authUserId);
     const isDownVoted = thread.downVotesBy.includes(authUserId);
@@ -47,7 +47,7 @@ export const asyncToggleUpVotedThread = createAsyncThunk(
 export const asyncToggleDownVotedThread = createAsyncThunk(
   'thread/downVote',
   async ({ id, authUserId }, { dispatch, getState, rejectWithValue }) => {
-    const threadsState = getState().threads;
+    const threadsState = getState().leaderboards;
     const thread = threadsState.threads.find((t) => t.id === id);
     const isUpVoted = thread.upVotesBy.includes(authUserId);
     const isDownVoted = thread.downVotesBy.includes(authUserId);

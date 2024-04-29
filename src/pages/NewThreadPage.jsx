@@ -2,7 +2,7 @@ import { Box, Card, Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NewThreadInput from '../components/input/NewThreadInput';
+import NewThreadInput from '../components/fragments/NewThreadInput';
 import {asyncPostThread} from "../store/threads/action";
 import {resetPostThread} from "../store/threads/threads_slice";
 

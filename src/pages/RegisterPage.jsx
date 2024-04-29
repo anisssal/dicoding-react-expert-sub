@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { LOGIN_ROUTE } from '../utils/route-name';
-import RegisterInput from '../components/input/RegisterInput';
+import RegisterInput from '../components/fragments/RegisterInput';
 import { toastSuccess } from '../utils/toast';
 import {registerUser} from "../store/auth/auth_action";
 

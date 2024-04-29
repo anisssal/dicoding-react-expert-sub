@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
+import Button from '@mui/material/Button';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { postedAt } from '../utils/index';
 import {
   asyncGetDetailThread,
@@ -15,7 +17,7 @@ import {
 import ThreadTag from '../components/threads/ThreadTag';
 import UpVoteButton from '../components/action/UpVoteButton';
 import DownVoteButton from '../components/action/DownVoteButton';
-import NewCommentInput from '../components/input/NewCommentInput';
+import NewCommentInput from '../components/fragments/NewCommentInput';
 import { resetDetailThreadState } from '../store/detail_thread/detail_thread_slice';
 import CommentList from '../components/comments/CommentList';
 import { HOME_ROUTE } from '../utils/route-name';
@@ -27,7 +29,6 @@ function DetailThreadPage() {
   const navigate = useNavigate();
   const { thread, getDetailThreadError } = useSelector((states) => states.detailThread);
   const { authUser } = useSelector((states) => states.auth);
-
   useEffect(() => {
     dispatch(resetDetailThreadState());
   }, [dispatch]);
@@ -70,8 +71,16 @@ function DetailThreadPage() {
       <Grid container>
         <Grid item sm={1} />
         <Grid item sm={7}>
-          <Stack alignItems="left" justifyContent="left" sx={{ height: 1, margin: 1 }}>
-            <Card sx={{ p: 1, mt: 4, width: 1 }}>
+          <Stack alignItems="flex-start" justifyContent="left" sx={{ height: 1, margin: 1, pt: 3 }}>
+            <Button
+              onClick={() => {
+                navigate(HOME_ROUTE, { replace: true });
+              }}
+              variant="text"
+            >
+              <ArrowBackIcon />
+            </Button>
+            <Card sx={{ p: 1, width: 1, mt: 2 }}>
               <CardHeader
                 avatar={<Avatar aria-label="user-avatar" src={thread.owner?.avatar} />}
                 title={<Typography variant="subtitle1">{thread.owner?.name}</Typography>}
@@ -100,28 +109,27 @@ function DetailThreadPage() {
                 <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
                   <ThreadTag category={thread.category} />
                   <Stack direction="row" spacing={1.2}>
-
-                      <UpVoteButton isUpVoted={isUpVoted} onUpvoteClick={() => onUpvoteClick()} totalVote={thread.upVotesBy.length} />
+                    <UpVoteButton isUpVoted={isUpVoted} onUpvoteClick={() => onUpvoteClick()} totalVote={thread.upVotesBy.length} />
                     <DownVoteButton isDownVoted={isDownVoted} onDownVoteClick={() => onDownVoteClick()} totalVote={thread.downVotesBy.length} />
                   </Stack>
                 </Stack>
               </CardActions>
             </Card>
             <Divider sx={{ my: 3 }} />
-            <Card sx={{ pt: '16px' }}>
-              { thread.comments.length === 0 && (
+            <Card sx={{ pt: '16px', width: 1 }}>
+              {thread.comments.length === 0 && (
                 <Typography variant="body1" sx={{ pl: '16px', mb: 2 }}>
                   Be the first to comment!
                 </Typography>
               )}
-              <NewCommentInput authUser={authUser}  onCommentSubmitted={(newComment) => onNewCommentSubmitted(newComment)}  />
+              <NewCommentInput authUser={authUser} onCommentSubmitted={(newComment) => onNewCommentSubmitted(newComment)} />
 
               <CardContent>
                 <CommentList
-                    authUserId={authUser?.id}
-                    comments={thread.comments}
-                    onToggleDownVoted={(commentId, authUserId) => onToggleDownVotedCommentHandler(commentId, authUserId)}
-                    onToggleUpVoted={(commentId, authUserId) => onToggleUpVotedCommentHandler(commentId, authUserId)}
+                  authUserId={authUser?.id}
+                  comments={thread.comments}
+                  onToggleDownVoted={(commentId, authUserId) => onToggleDownVotedCommentHandler(commentId, authUserId)}
+                  onToggleUpVoted={(commentId, authUserId) => onToggleUpVotedCommentHandler(commentId, authUserId)}
                 />
               </CardContent>
             </Card>

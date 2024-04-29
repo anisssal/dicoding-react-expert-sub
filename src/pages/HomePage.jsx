@@ -1,12 +1,14 @@
 import { Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import ThreadList from '../components/threads/ThreadList';
+import ThreadsList from '../components/fragments/ThreadsList';
 import { asyncPopulateUsersAndThreads } from '../store/shared/shared_action';
 import {
   asyncToggleDownVotedThread,
   asyncToggleUpVotedThread,
 } from '../store/threads/action';
+import {selectThreadsWithUser} from "../store/shared/selectors";
+import ThreadCategoriesList from "../components/fragments/ThreadCategoriesList";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -15,15 +17,8 @@ export default function HomePage() {
     dispatch(asyncPopulateUsersAndThreads());
   }, [dispatch]);
 
-  const { threads } = useSelector((states) => states.threads);
+  const threadsData = useSelector((state)=>selectThreadsWithUser(state));
   const { authUser } = useSelector((states) => states.auth);
-  const { users = [] } = useSelector((states) => states);
-
-  const threadsData = threads.map((thread) => ({
-    ...thread,
-    user: users.find((user) => user.id === thread.ownerId),
-  }));
-
 
   function onToggleDownVotedHandler(id, authUserId) {
     dispatch(asyncToggleDownVotedThread({ id, authUserId }));
@@ -33,11 +28,14 @@ export default function HomePage() {
     dispatch(asyncToggleUpVotedThread({ id, authUserId }));
   }
 
+
   return (
     <Grid container>
-      <Grid item sm={0} md={3} />
+      <Grid item sm={0} md={3} sx={{pt:4, px : 3}}>
+        <ThreadCategoriesList/>
+      </Grid>
       <Grid item sm={12} md={7} sx={{ px: { xs: 2, md: 0 } }}>
-        <ThreadList
+        <ThreadsList
           authUserId={authUser?.id}
           threads={threadsData}
           onToggleDownVoted={(id, authUserId) =>

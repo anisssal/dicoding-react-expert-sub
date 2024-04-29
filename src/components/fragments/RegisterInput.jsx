@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import {  InputAdornment, Stack, TextField } from '@mui/material';
+import { InputAdornment, Stack, TextField } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import { useState } from 'react';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
@@ -75,22 +75,8 @@ function RegisterInput({ onRegisterSubmitted, loading }) {
   return (
     <form className="register-form-input" onSubmit={onSubmitHandler}>
       <Stack spacing={3} sx={{ mt: 2 }}>
-        <TextField
-          name="name"
-          label="Name"
-          value={name}
-          onChange={setName}
-          error={!!errorName}
-          helperText={errorName}
-        />
-        <TextField
-          name="email"
-          label="Email"
-          value={email}
-          onChange={setEmail}
-          error={!!errorEmail}
-          helperText={errorEmail}
-        />
+        <TextField name="name" label="Name" value={name} onChange={setName} error={!!errorName} helperText={errorName} />
+        <TextField name="email" label="Email" value={email} onChange={setEmail} error={!!errorEmail} helperText={errorEmail} />
         <TextField
           name="password"
           label="Password"
@@ -102,10 +88,7 @@ function RegisterInput({ onRegisterSubmitted, loading }) {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton
-                  onClick={() => setShowPassword(!showPassword)}
-                  edge="end"
-                >
+                <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
                   {showPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
                 </IconButton>
               </InputAdornment>
@@ -123,30 +106,15 @@ function RegisterInput({ onRegisterSubmitted, loading }) {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  edge="end"
-                >
-                  {showConfirmPassword ? (
-                    <RemoveRedEyeIcon />
-                  ) : (
-                    <VisibilityOffIcon />
-                  )}
+                <IconButton onClick={() => setShowConfirmPassword(!showConfirmPassword)} edge="end">
+                  {showConfirmPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
                 </IconButton>
               </InputAdornment>
             ),
           }}
         />
 
-        <LoadingButton
-          loading={loading}
-          sx={{ mt: 4 }}
-          fullWidth
-          size="large"
-          type="submit"
-          variant="contained"
-          color="primary"
-        >
+        <LoadingButton loading={loading} sx={{ mt: 4 }} fullWidth size="large" type="submit" variant="contained" color="primary">
           Register
         </LoadingButton>
       </Stack>

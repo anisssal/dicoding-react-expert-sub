@@ -3,7 +3,7 @@ import Link from '@mui/material/Link';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginInput from '../components/input/LoginInput';
+import LoginInput from '../components/fragments/LoginInput';
 import { REGISTER_ROUTE } from '../utils/route-name';
 import { loginUser } from '../store/auth/auth_action';
 

@@ -39,7 +39,6 @@ function MyAppBar({ user, onSignOut }) {
   const handleCloseMobileNav = () => {
     setMobileNavOpen(false);
   };
-
   const title = 'REACT DISCUSSION';
   const displayOnlyShowOnMobile = { xs: 'flex', sm: 'none' };
   const displayHideOnMobile = { xs: 'none', sm: 'flex' };

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
-import ThreadCard from './ThreadCard';
+import ThreadCard from '../threads/ThreadCard';
 import threadItemShape from '../../data/types/thread-item-shape';
 
-export default function ThreadList({
+export default function ThreadsList({
   threads,
   authUserId,
   onToggleDownVoted,
@@ -31,10 +31,10 @@ export default function ThreadList({
     </Box>
   );
 }
-ThreadList.defaultProps = {
+ThreadsList.defaultProps = {
   authUserId: null,
 };
-ThreadList.propTypes = {
+ThreadsList.propTypes = {
   threads: PropTypes.arrayOf(PropTypes.shape(threadItemShape)).isRequired,
   authUserId: PropTypes.string,
   onToggleUpVoted: PropTypes.func.isRequired,
