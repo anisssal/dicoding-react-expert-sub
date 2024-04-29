@@ -8,7 +8,7 @@ import { DETAIL_THREAD_ROUTE } from '../../utils/route-name';
 import ThreadCardHeader from './ThreadCardHeader';
 import UpVoteButton from '../action/UpVoteButton';
 import DownVoteButton from '../action/DownVoteButton';
-import ThreadTag from './ThreadTag';
+import ThreadTagChip from './ThreadTagChip';
 
 function ThreadCard({ id, title, body, category, createdAt, user, authUserId, upVotesBy, downVotesBy, totalComments, onToggleDownVoted, onToggleUpVoted }) {
   const isUpVoted = upVotesBy.includes(authUserId);
@@ -47,7 +47,7 @@ function ThreadCard({ id, title, body, category, createdAt, user, authUserId, up
 
       <CardActions>
         <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
-          <ThreadTag category={category} />
+          <ThreadTagChip category={category} />
           <Stack direction="row" spacing={1.2}>
             <UpVoteButton isUpVoted={isUpVoted} onUpvoteClick={() => onUpvoteClick()} totalVote={upVotesBy.length} />
 

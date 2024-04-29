@@ -44,8 +44,7 @@ const authSlice = createSlice({
       state.registerLoading = true;
       state.registerSuccess = false;
     });
-    builder.addCase(registerUser.fulfilled, (state, { payload }) => {
-      state.authUser = payload;
+    builder.addCase(registerUser.fulfilled, (state, { _payload }) => {
       state.registerLoading = false;
       state.registerSuccess = true;
     });

@@ -14,7 +14,7 @@ import {
   asyncToggleUpVotedThreadComment,
   asyncToggleUpVotedThreadDetail,
 } from '../store/detail_thread/action';
-import ThreadTag from '../components/threads/ThreadTag';
+import ThreadTagChip from '../components/threads/ThreadTagChip';
 import UpVoteButton from '../components/action/UpVoteButton';
 import DownVoteButton from '../components/action/DownVoteButton';
 import NewCommentInput from '../components/fragments/NewCommentInput';
@@ -107,7 +107,7 @@ function DetailThreadPage() {
               </CardContent>
               <CardActions>
                 <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
-                  <ThreadTag category={thread.category} />
+                  <ThreadTagChip category={thread.category} />
                   <Stack direction="row" spacing={1.2}>
                     <UpVoteButton isUpVoted={isUpVoted} onUpvoteClick={() => onUpvoteClick()} totalVote={thread.upVotesBy.length} />
                     <DownVoteButton isDownVoted={isDownVoted} onDownVoteClick={() => onDownVoteClick()} totalVote={thread.downVotesBy.length} />

@@ -19,7 +19,7 @@ export default function LeaderboardsPage() {
     <Grid container>
       <Grid item sm={0} md={3} />
       <Grid item sm={12} md={7} sx={{ my: 4 }}>
-        <Typography variant="h4">Leaderboards Active Users</Typography>
+        <Typography variant="h4">Active Users Leaderboards </Typography>
         <LeaderboardsList leaderboards={leaderboards} />
       </Grid>
     </Grid>

@@ -5,7 +5,7 @@ import LeaderboardItem from '../LeaderboardItem';
 
 export default function LeaderboardsList({ leaderboards }) {
   return (
-    <Paper sx={{ my: { xs: 1, mb: 3 } }}>
+    <Paper sx={{ my: 2, py: 1 }}>
       {leaderboards.map((leaderboard) => (
         <LeaderboardItem key={leaderboard.user.id} user={leaderboard.user} score={leaderboard.score} />
       ))}
