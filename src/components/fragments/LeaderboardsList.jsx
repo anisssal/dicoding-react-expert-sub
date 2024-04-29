@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Paper} from '@mui/material';
 import leaderboardShape from '../../data/types/leaderboard-shape';
-import LeaderboardItem from '../threads/LeaderboardItem';
+import LeaderboardItem from '../LeaderboardItem';
 
 export default function LeaderboardsList({ leaderboards }) {
   return (

@@ -1,8 +1,8 @@
-import { List, ListItemButton, ListItemIcon, ListItemText, Paper, Stack, Typography } from '@mui/material';
-import TagIcon from '@mui/icons-material/Tag';
+import { List, Paper, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilterCategory } from '../../store/threads/threads_slice';
 import { selectThreadsCategory } from '../../store/threads/selectors';
+import ThreadCategoryItem from '../ThreadCategoryItem';
 
 export default function ThreadCategoriesList() {
   const categories = useSelector((states) => selectThreadsCategory(states.threads));
@@ -25,12 +25,7 @@ export default function ThreadCategoriesList() {
       <Paper>
         <List component="nav" aria-label="category-list">
           {categories.map((category) => (
-            <ListItemButton key={category} selected={category === filterCategory} onClick={() => categoryClickHandler(category)}>
-              <ListItemIcon>
-                <TagIcon />
-              </ListItemIcon>
-              <ListItemText primary={category} />
-            </ListItemButton>
+            <ThreadCategoryItem key={category} category={category} selected={category === filterCategory} onClick={() => categoryClickHandler(category)} />
           ))}
         </List>
       </Paper>

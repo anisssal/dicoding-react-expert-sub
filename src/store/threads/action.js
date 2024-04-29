@@ -17,7 +17,7 @@ export const asyncPostThread = createAsyncThunk(
 export const asyncToggleUpVotedThread = createAsyncThunk(
   'thread/upVote',
   async ({ id, authUserId }, { dispatch, getState, rejectWithValue }) => {
-    const threadsState = getState().leaderboards;
+    const threadsState = getState().threads;
     const thread = threadsState.threads.find((t) => t.id === id);
     const isUpVoted = thread.upVotesBy.includes(authUserId);
     const isDownVoted = thread.downVotesBy.includes(authUserId);
@@ -47,28 +47,29 @@ export const asyncToggleUpVotedThread = createAsyncThunk(
 export const asyncToggleDownVotedThread = createAsyncThunk(
   'thread/downVote',
   async ({ id, authUserId }, { dispatch, getState, rejectWithValue }) => {
-    const threadsState = getState().leaderboards;
-    const thread = threadsState.threads.find((t) => t.id === id);
-    const isUpVoted = thread.upVotesBy.includes(authUserId);
-    const isDownVoted = thread.downVotesBy.includes(authUserId);
-    try {
-      dispatch(toggleDownVoteThread({ id, authUserId }));
-      if (isUpVoted) {
-        dispatch(toggleUpVoteThread({ id, authUserId }));
+      const threadsState = getState().threads;
+      const thread = threadsState.threads.find((t) => t.id === id);
+      const isUpVoted = thread.upVotesBy.includes(authUserId);
+      const isDownVoted = thread.downVotesBy.includes(authUserId);
+      try {
+          dispatch(toggleDownVoteThread({ id, authUserId }));
+          if (isUpVoted) {
+              dispatch(toggleUpVoteThread({ id, authUserId }));
+          }
+
+          if (!isDownVoted) {
+              await api.downVoteThread(id);
+          } else {
+              await api.neutralVoteThread(id);
+          }
+          return null;
+      } catch (error) {
+          dispatch(toggleDownVoteThread({ id, authUserId }));
+          if (isUpVoted) {
+              dispatch(toggleUpVoteThread({ id, authUserId }));
+          }
+          return rejectWithValue(error.message);
       }
 
-      if (!isDownVoted) {
-        await api.downVoteThread(id);
-      } else {
-        await api.neutralVoteThread(id);
-      }
-      return null;
-    } catch (error) {
-      dispatch(toggleDownVoteThread({ id, authUserId }));
-      if (isUpVoted) {
-        dispatch(toggleUpVoteThread({ id, authUserId }));
-      }
-      return rejectWithValue(error.message);
-    }
   }
 );

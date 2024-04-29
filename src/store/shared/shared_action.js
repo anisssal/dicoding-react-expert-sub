@@ -9,10 +9,10 @@ export const asyncPopulateUsersAndThreads = createAsyncThunk(
     async (_, { dispatch, rejectWithValue }) => {
         dispatch(showGlobalLoading());
         try {
-            const users = await api.getAllUsers();
-            const threads = await api.getAllThreads();
-            dispatch(receiveUsers(users));
-            dispatch(receiveThreads(threads));
+
+            const result =await Promise.all([api.getAllUsers(), api.getAllThreads(),])
+            dispatch(receiveUsers(result[0]));
+            dispatch(receiveThreads(result[1]));
         } catch (error) {
             rejectWithValue(error.message);
         }
