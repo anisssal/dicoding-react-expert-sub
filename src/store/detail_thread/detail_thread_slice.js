@@ -74,7 +74,7 @@ const detailThreadSlice = createSlice({
     builder.addCase(asyncGetDetailThread.fulfilled, (state, { payload }) => {
       state.thread = payload;
     });
-    builder.addCase(asyncPostCommentThread.pending, (state, { payload }) => {
+    builder.addCase(asyncPostCommentThread.pending, (state) => {
       state.postCommentSuccess = false;
       state.postCommentLoading = true;
     });

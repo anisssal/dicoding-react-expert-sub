@@ -82,7 +82,6 @@ export const asyncPostCommentThread = createAsyncThunk(
     try {
       const state = getState().detailThread;
       const { id } = state.thread;
-      await new Promise((resolve) => setTimeout(resolve, 10000));
       return await api.createComment({ threadId: id, content });
     } catch (error) {
       return rejectWithValue(error.message);

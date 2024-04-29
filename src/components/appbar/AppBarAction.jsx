@@ -3,10 +3,10 @@ import Link from "@mui/material/Link";
 import PropTypes from "prop-types";
 import {IconButton} from "@mui/material";
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import {Person} from "@mui/icons-material";
 import {LOGIN_ROUTE, NEW_THREAD_ROUTE, REGISTER_ROUTE} from "../../utils/route-name";
 import UserPopover from "./UserPopover";
 import userShape from "../../data/types/user-shape";
-import {Person} from "@mui/icons-material";
 
 export default function AppBarAction({ user, onSignOut }){
     return (

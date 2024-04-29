@@ -4,7 +4,6 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import OutlinedDiv from '../OutlinedDiv';
-import loading from '../Loading.jsx';
 
 export default function NewCommentInput({
   isLoading,

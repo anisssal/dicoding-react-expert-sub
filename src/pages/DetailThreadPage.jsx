@@ -158,7 +158,7 @@ function DetailThreadPage() {
             <Divider sx={{ my: 3 }} />
             <Card sx={{ pt: '16px' }}>
               {thread.comments.length === 0 && (
-                <Typography variant="body1" sx={{ pl: '16px' }}>
+                <Typography variant="body1" sx={{ pl: '16px', mb : 2 }}>
                   Be the first to comment!
                 </Typography>
               )}
