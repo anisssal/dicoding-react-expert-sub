@@ -24,7 +24,6 @@ export default function HomePage() {
     user: users.find((user) => user.id === thread.ownerId),
   }));
 
-  function onCommentClickHandler() {}
 
   function onToggleDownVotedHandler(id, authUserId) {
     dispatch(asyncToggleDownVotedThread({ id, authUserId }));
@@ -41,7 +40,6 @@ export default function HomePage() {
         <ThreadList
           authUserId={authUser?.id}
           threads={threadsData}
-          onCommentsClick={() => onCommentClickHandler()}
           onToggleDownVoted={(id, authUserId) =>
             onToggleDownVotedHandler(id, authUserId)
           }

@@ -25,7 +25,7 @@ function DetailThreadPage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { thread, getDetailThreadError, postCommentSuccess, postCommentLoading } = useSelector((states) => states.detailThread);
+  const { thread, getDetailThreadError } = useSelector((states) => states.detailThread);
   const { authUser } = useSelector((states) => states.auth);
 
   useEffect(() => {
@@ -114,7 +114,7 @@ function DetailThreadPage() {
                   Be the first to comment!
                 </Typography>
               )}
-              <NewCommentInput authUser={authUser} isLoading={postCommentLoading} onCommentSubmitted={(newComment) => onNewCommentSubmitted(newComment)} postCommentSuccess={postCommentSuccess} />
+              <NewCommentInput authUser={authUser}  onCommentSubmitted={(newComment) => onNewCommentSubmitted(newComment)}  />
 
               <CardContent>
                 <CommentList

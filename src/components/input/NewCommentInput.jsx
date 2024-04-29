@@ -1,19 +1,21 @@
-import {Avatar, Box, Stack} from '@mui/material';
+import { Avatar, Box, Stack } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import OutlinedDiv from '../OutlinedDiv';
-import userShape from "../../data/types/user-shape";
-import {LOGIN_ROUTE} from "../../utils/route-name";
+import userShape from '../../data/types/user-shape';
+import { LOGIN_ROUTE } from '../../utils/route-name';
 
 const inputCommentId = 'input-comment';
 
-export default function NewCommentInput({ authUser , isLoading, onCommentSubmitted, postCommentSuccess }) {
+export default function NewCommentInput({ authUser, onCommentSubmitted }) {
   const [newComment, setNewComment] = useState('');
   const [showBtnGroup, setShowBtnGroup] = useState(false);
   const navigate = useNavigate();
+  const { postCommentSuccess, postCommentLoading: isLoading } = useSelector((states) => states.detailThread);
 
   useEffect(() => {
     if (postCommentSuccess) {
@@ -39,45 +41,39 @@ export default function NewCommentInput({ authUser , isLoading, onCommentSubmitt
     inputEl.innerHTML = '';
   }
 
-  if (!authUser){
+  if (!authUser) {
     return (
-        <Box display="flex" alignItems="center">
-          <Button
-              variant="outlined"
-              sx={{mx : "auto"}}
-              onClick={() => navigate(LOGIN_ROUTE)}>Sign in to give a comment</Button>
-        </Box>
-    )
+      <Button variant="outlined" sx={{ mx: '16px' }} onClick={() => navigate(LOGIN_ROUTE)}>
+        Sign in to give a comment
+      </Button>
+    );
   }
-    return (<Stack direction="row" spacing={1} sx={{ pl: '16px', pr: '16px', mt: '16px,' }}>
+  return (
+    <Stack direction="row" spacing={1} sx={{ pl: '16px', pr: '16px', mt: '16px,' }}>
       <Avatar aria-label="user-avatar" src={authUser?.avatar} />
       <Box sx={{ flexGrow: 1 }}>
         <form onSubmit={onSubmitHandler}>
           <Stack direction="column" alignItems="flex-end">
             <OutlinedDiv label="Comment">
-              <Box id={inputCommentId} className="content-editable-input" onInput={(e) => onCommentChange(e)}
-                   contentEditable data-placeholder="Add a comment..."/>
+              <Box id={inputCommentId} className="content-editable-input" onInput={(e) => onCommentChange(e)} contentEditable data-placeholder="Add a comment..." />
             </OutlinedDiv>
             {showBtnGroup && (
-                <Stack direction="row">
-                  <Button variant="text" onClick={() => onCancelClick()} disabled={isLoading}>
-                    Cancel
-                  </Button>
-                  <LoadingButton disabled={newComment.length === 0} loading={isLoading} size="large" type="submit"
-                                 variant="contained" color="primary">
-                    Submit
-                  </LoadingButton>
-                </Stack>
+              <Stack direction="row">
+                <Button variant="text" onClick={() => onCancelClick()} disabled={isLoading}>
+                  Cancel
+                </Button>
+                <LoadingButton disabled={newComment.length === 0} loading={isLoading} size="large" type="submit" variant="contained" color="primary">
+                  Submit
+                </LoadingButton>
+              </Stack>
             )}
           </Stack>
         </form>
       </Box>
-    </Stack>)
-
+    </Stack>
+  );
 }
 NewCommentInput.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
   authUser: PropTypes.shape(userShape).isRequired,
   onCommentSubmitted: PropTypes.func.isRequired,
-  postCommentSuccess: PropTypes.bool.isRequired,
 };

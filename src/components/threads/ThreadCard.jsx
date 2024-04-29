@@ -1,13 +1,4 @@
-import {
-  ButtonBase,
-  Card,
-  CardActions,
-  CardContent,
-  Divider,
-  IconButton,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { ButtonBase, Card, CardActions, CardContent, Divider, IconButton, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
@@ -17,52 +8,25 @@ import { DETAIL_THREAD_ROUTE } from '../../utils/route-name';
 import ThreadCardHeader from './ThreadCardHeader';
 import UpVoteButton from '../action/UpVoteButton';
 import DownVoteButton from '../action/DownVoteButton';
-import ThreadTag from "./ThreadTag";
+import ThreadTag from './ThreadTag';
 
-function ThreadCard({
-  id,
-  title,
-  body,
-  category,
-  createdAt,
-  user,
-  authUserId,
-  upVotesBy,
-  downVotesBy,
-  totalComments,
-  onToggleDownVoted,
-  onToggleUpVoted,
-  onCommentsClick,
-}) {
+function ThreadCard({ id, title, body, category, createdAt, user, authUserId, upVotesBy, downVotesBy, totalComments, onToggleDownVoted, onToggleUpVoted }) {
+  const isUpVoted = upVotesBy.includes(authUserId);
+  const isDownVoted = downVotesBy.includes(authUserId);
 
-    const isUpVoted = upVotesBy.includes(authUserId);
-    const isDownVoted = downVotesBy.includes(authUserId);
+  function onUpvoteClick() {
+    onToggleUpVoted(id, authUserId);
+  }
 
-    function onUpvoteClick() {
-        onToggleUpVoted(id, authUserId);
-    }
-
-    function onDownVoteClick() {
-        onToggleDownVoted(id, authUserId);
-    }
-
+  function onDownVoteClick() {
+    onToggleDownVoted(id, authUserId);
+  }
 
   return (
     <Card sx={{ mt: 2 }}>
-      <ThreadCardHeader
-        id={id}
-        user={user}
-        title={title}
-        createdAt={createdAt}
-      />
+      <ThreadCardHeader id={id} user={user} title={title} createdAt={createdAt} />
       <Divider />
-      <ButtonBase
-        component={Link}
-        sx={{ width: '100%', justifyContent: 'left' }}
-        underline="none"
-        color="inherit"
-        href={`${DETAIL_THREAD_ROUTE}/${id}`}
-      >
+      <ButtonBase component={Link} sx={{ width: '100%', justifyContent: 'left' }} underline="none" color="inherit" href={`${DETAIL_THREAD_ROUTE}/${id}`}>
         <CardContent>
           <Typography
             variant="body2"
@@ -82,34 +46,17 @@ function ThreadCard({
       </ButtonBase>
 
       <CardActions>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          sx={{ width: '100%' }}
-        >
-          <ThreadTag category={category}/>
+        <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
+          <ThreadTag category={category} />
           <Stack direction="row" spacing={1.2}>
-            <UpVoteButton
-              isUpVoted={isUpVoted}
-              onUpvoteClick={() =>onUpvoteClick()}
-              totalVote={upVotesBy.length}
-            />
+            <UpVoteButton isUpVoted={isUpVoted} onUpvoteClick={() => onUpvoteClick()} totalVote={upVotesBy.length} />
 
-            <DownVoteButton
-              isDownVoted={isDownVoted}
-              onDownVoteClick={()=>onDownVoteClick()}
-              totalVote={downVotesBy.length}
-            />
+            <DownVoteButton isDownVoted={isDownVoted} onDownVoteClick={() => onDownVoteClick()} totalVote={downVotesBy.length} />
 
             <Stack direction="row" alignItems="center">
-              <IconButton disableRipple onClick={onCommentsClick}>
-                <Icon
-                  icon="material-symbols:comment"
-                  width="20px"
-                  height="20px"
-                  sx={{ fontSize: '18px' }}
-                />
-              </IconButton>
+              <Link component={IconButton} disableRipple href={`${DETAIL_THREAD_ROUTE}/${id}`}>
+                <Icon icon="material-symbols:comment" width="20px" height="20px" sx={{ fontSize: '18px' }} />
+              </Link>
               <Typography variant="subtitle" color="text.secondary">
                 {totalComments}
               </Typography>
@@ -125,7 +72,6 @@ ThreadCard.propTypes = {
   ...threadItemShape,
   onToggleUpVoted: PropTypes.func.isRequired,
   onToggleDownVoted: PropTypes.func.isRequired,
-  onCommentsClick: PropTypes.func.isRequired,
 };
 
 export default ThreadCard;

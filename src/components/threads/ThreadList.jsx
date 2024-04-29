@@ -8,7 +8,6 @@ export default function ThreadList({
   authUserId,
   onToggleDownVoted,
   onToggleUpVoted,
-  onCommentsClick,
 }) {
   return (
     <Box sx={{ my: { xs: 1, md: 3 } }}>
@@ -27,7 +26,6 @@ export default function ThreadList({
           upVotesBy={thread.upVotesBy}
           onToggleUpVoted={onToggleUpVoted}
           onToggleDownVoted={onToggleDownVoted}
-          onCommentsClick={onCommentsClick}
         />
       ))}
     </Box>
@@ -41,5 +39,4 @@ ThreadList.propTypes = {
   authUserId: PropTypes.string,
   onToggleUpVoted: PropTypes.func.isRequired,
   onToggleDownVoted: PropTypes.func.isRequired,
-  onCommentsClick: PropTypes.func.isRequired,
 };
