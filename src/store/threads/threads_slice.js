@@ -57,6 +57,7 @@ const threadsSlice = createSlice({
     });
     builder.addCase(asyncPostThread.fulfilled, (state, { _payload }) => {
       state.postThreadSuccess = true;
+      state.postThreadLoading = false;
       toastSuccess('Success posting new thread!');
     });
     builder.addCase(asyncPostThread.rejected, (state, { payload }) => {

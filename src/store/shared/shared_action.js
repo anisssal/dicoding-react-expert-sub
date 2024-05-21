@@ -11,7 +11,8 @@ export const asyncPopulateUsersAndThreads = createAsyncThunk('shared/populateUse
     dispatch(receiveUsers(result[0]));
     dispatch(receiveThreads(result[1]));
   } catch (error) {
-    rejectWithValue(error.message);
+    dispatch(hideGlobalLoading());
+    return rejectWithValue(error.message);
   }
   dispatch(hideGlobalLoading());
 });

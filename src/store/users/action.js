@@ -9,7 +9,8 @@ export const asyncPopulateLeaderboard = createAsyncThunk('shared/populateUserAnd
     const users = await api.getLeaderboards();
     dispatch(receiveUserLeaderboards(users));
   } catch (error) {
-    rejectWithValue(error.message);
+    dispatch(hideGlobalLoading());
+    return rejectWithValue(error.message);
   }
   dispatch(hideGlobalLoading());
 });

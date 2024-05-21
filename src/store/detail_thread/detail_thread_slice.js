@@ -20,7 +20,7 @@ const detailThreadSlice = createSlice({
   initialState,
   reducers: {
     resetDetailThreadState: (state, _action) => {
-      state.detailThread = null;
+      state.thread = null;
       state.postCommentLoading = false;
       state.postCommentSuccess = false;
       state.getDetailThreadError = false;
@@ -72,7 +72,10 @@ const detailThreadSlice = createSlice({
     builder.addCase(asyncGetDetailThread.fulfilled, (state, { payload }) => {
       state.thread = payload;
     });
-
+    builder.addCase(asyncGetDetailThread.rejected, (state, { payload }) => {
+      toastError(payload);
+      state.getDetailThreadError = true;
+    });
     builder.addCase(asyncPostCommentThread.pending, (state) => {
       state.postCommentSuccess = false;
       state.postCommentLoading = true;
@@ -82,11 +85,11 @@ const detailThreadSlice = createSlice({
       state.postCommentSuccess = true;
       state.postCommentLoading = false;
     });
-
-    builder.addCase(asyncGetDetailThread.rejected, (state, { payload }) => {
+    builder.addCase(asyncPostCommentThread.rejected, (state, { payload }) => {
       toastError(payload);
-      state.getDetailThreadError = true;
+      state.postCommentLoading = false;
     });
+
     builder.addCase(asyncToggleUpVotedThreadDetail.rejected, (state, { payload }) => {
       toastError(payload);
     });
@@ -94,9 +97,6 @@ const detailThreadSlice = createSlice({
       toastError(payload);
     });
 
-    builder.addCase(asyncPostCommentThread.rejected, (state, { payload }) => {
-      toastError(payload);
-    });
     builder.addCase(asyncToggleUpVotedThreadComment.rejected, (state, { payload }) => {
       toastError(payload);
     });
