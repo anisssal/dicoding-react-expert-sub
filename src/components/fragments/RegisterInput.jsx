@@ -75,10 +75,11 @@ function RegisterInput({ onRegisterSubmitted, loading }) {
   return (
     <form className="register-form-input" onSubmit={onSubmitHandler}>
       <Stack spacing={3} sx={{ mt: 2 }}>
-        <TextField name="name" label="Name" value={name} onChange={setName} error={!!errorName} helperText={errorName} />
-        <TextField name="email" label="Email" value={email} onChange={setEmail} error={!!errorEmail} helperText={errorEmail} />
+        <TextField name="name" placeholder="Name" label="Name" value={name} onChange={setName} error={!!errorName} helperText={errorName} />
+        <TextField name="email" placeholder="Email" label="Email" value={email} onChange={setEmail} error={!!errorEmail} helperText={errorEmail} />
         <TextField
           name="password"
+          placeholder="Password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
           value={password}
@@ -97,6 +98,7 @@ function RegisterInput({ onRegisterSubmitted, loading }) {
         />
         <TextField
           name="confirm-password"
+          placeholder="Confirmation Password"
           label="Confirmation Password"
           type={showConfirmPassword ? 'text' : 'password'}
           value={confirmPassword}

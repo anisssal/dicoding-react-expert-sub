@@ -48,9 +48,12 @@ function LoginInput({ onLoginSubmitted, loading }) {
   return (
     <form onSubmit={onSubmitHandler}>
       <Stack spacing={3}>
-        <TextField name="email" label="Email" value={email} onChange={setEmail} error={!!errorEmail} helperText={errorEmail} />
+        <TextField name="email"
+        placeholder="Email"
+                   label="Email" value={email} onChange={setEmail} error={!!errorEmail} helperText={errorEmail} />
         <TextField
           name="password"
+          placeholder="Password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
           value={password}

@@ -6,7 +6,7 @@ import userShape from '../data/types/user-shape';
 /** * Component for leaderboard item on leaderboard list */
 export default function LeaderboardItem({ user, score }) {
   return (
-    <ListItem secondaryAction={<Typography variant="subtitle1">{score}</Typography>}>
+    <ListItem className="leaderboard-item" secondaryAction={<Typography variant="subtitle1">{score}</Typography>}>
       <ListItemAvatar>
         <Avatar alt="User Avatar" src={user.avatar} />
       </ListItemAvatar>

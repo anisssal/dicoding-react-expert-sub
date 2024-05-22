@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './styles/style.css';
+import './styles/icon_style.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import App from './App';

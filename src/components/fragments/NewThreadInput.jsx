@@ -47,7 +47,7 @@ function NewThreadInput({ onThreadSubmitted, loading }) {
         <TextField name="category" label="Category" value={category} onChange={setCategory} />
 
         <OutlinedDiv label="Content" error={errorBody}>
-          <div id="input-thread__body" className="content-editable-input" onInput={onBodyChange} contentEditable data-placeholder="Input your content here" />
+          <div id="input-thread__body"  data-testid="new-thread-body-input" className="content-editable-input" onInput={onBodyChange} contentEditable data-placeholder="Input your content here" />
         </OutlinedDiv>
 
         <LoadingButton loading={loading} sx={{ mt: 4 }} fullWidth size="large" type="submit" variant="contained" color="primary">
