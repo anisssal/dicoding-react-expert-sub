@@ -305,7 +305,7 @@ describe('detail thread slice extraReducers function', () => {
       getDetailThreadError: false,
     };
 
-    const action = { type: asyncPostCommentThread.pending.iconType };
+    const action = { type: asyncPostCommentThread.pending.type };
     const state = reducer(initialState, action);
     expect(state).toEqual({
       thread: null,
@@ -339,7 +339,7 @@ describe('detail thread slice extraReducers function', () => {
     };
 
     const action = {
-      type: asyncPostCommentThread.fulfilled.iconType,
+      type: asyncPostCommentThread.fulfilled.type,
       payload: {
         id: 'comment-1',
         content: 'Ini adalah komentar pertama',
@@ -412,7 +412,7 @@ describe('detail thread slice extraReducers function', () => {
       getDetailThreadError: false,
     };
 
-    const action = { type: asyncPostCommentThread.rejected.iconType };
+    const action = { type: asyncPostCommentThread.rejected.type };
     const state = reducer(initialState, action);
     expect(state).toEqual({
       thread: {
