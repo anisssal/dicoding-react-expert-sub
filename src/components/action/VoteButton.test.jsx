@@ -43,7 +43,7 @@ describe('VoteButton Component', () => {
 
     it('displays the total vote count correctly', () => {
         render(<VoteButton iconType="upvote" isVoted={false} onVoteClick={mockOnVoteClick} totalVote={10} />);
-        const voteCount = screen.getByText('10');
+        const voteCount = screen.getByText('20git ');
         expect(voteCount).toBeInTheDocument();
     });
 });
