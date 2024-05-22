@@ -15,12 +15,11 @@ import {
   asyncToggleUpVotedThreadDetail,
 } from '../store/detail_thread/action';
 import ThreadTagChip from '../components/threads/ThreadTagChip';
-import UpVoteButton from '../components/action/UpVoteButton';
-import DownVoteButton from '../components/action/DownVoteButton';
 import NewCommentInput from '../components/fragments/NewCommentInput';
 import { resetDetailThreadState } from '../store/detail_thread/detail_thread_slice';
 import CommentList from '../components/comments/CommentList';
-import { HOME_ROUTE } from '../utils/route-name';
+import {HOME_ROUTE, LOGIN_ROUTE} from '../utils/route-name';
+import VoteButton from '../components/action/VoteButton';
 
 function DetailThreadPage() {
   const { id } = useParams();
@@ -29,6 +28,7 @@ function DetailThreadPage() {
   const navigate = useNavigate();
   const { thread, getDetailThreadError } = useSelector((states) => states.detailThread);
   const { authUser } = useSelector((states) => states.auth);
+
   useEffect(() => {
     dispatch(resetDetailThreadState());
   }, [dispatch]);
@@ -43,28 +43,38 @@ function DetailThreadPage() {
 
   if (!thread) return null;
 
+  function checkAuth() {
+    if (!authUser) {
+      navigate(LOGIN_ROUTE);
+      return false;
+    }
+    return true;
+  }
+
+
   const isUpVoted = thread?.upVotesBy.includes(authUser?.id);
   const isDownVoted = thread?.downVotesBy.includes(authUser?.id);
 
   function onUpvoteClick() {
-    dispatch(asyncToggleUpVotedThreadDetail({ authUserId: authUser.id }));
+    if(checkAuth()) dispatch(asyncToggleUpVotedThreadDetail({ authUserId: authUser.id }));
   }
 
   function onDownVoteClick() {
-    dispatch(asyncToggleDownVotedThreadDetail({ authUserId: authUser.id }));
+    if(checkAuth())  dispatch(asyncToggleDownVotedThreadDetail({ authUserId: authUser.id }));
   }
 
   function onToggleDownVotedCommentHandler(commentId, authUserId) {
-    dispatch(asyncToggleDownVotedThreadComment({ commentId, authUserId }));
+    if(checkAuth())  dispatch(asyncToggleDownVotedThreadComment({ commentId, authUserId }));
   }
 
   function onToggleUpVotedCommentHandler(commentId, authUserId) {
-    dispatch(asyncToggleUpVotedThreadComment({ commentId, authUserId }));
+    if(checkAuth())  dispatch(asyncToggleUpVotedThreadComment({ commentId, authUserId }));
   }
 
   function onNewCommentSubmitted(content) {
     dispatch(asyncPostCommentThread({ content }));
   }
+
 
   return (
     <Box>
@@ -109,8 +119,8 @@ function DetailThreadPage() {
                 <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
                   <ThreadTagChip category={thread.category} />
                   <Stack direction="row" spacing={1.2}>
-                    <UpVoteButton isUpVoted={isUpVoted} onUpvoteClick={() => onUpvoteClick()} totalVote={thread.upVotesBy.length} />
-                    <DownVoteButton isDownVoted={isDownVoted} onDownVoteClick={() => onDownVoteClick()} totalVote={thread.downVotesBy.length} />
+                    <VoteButton iconType="upvote" isVoted={isUpVoted} onVoteClick={() => onUpvoteClick()} totalVote={thread.upVotesBy.length} />
+                    <VoteButton iconType="downvote" isVoted={isDownVoted} onVoteClick={() => onDownVoteClick()} totalVote={thread.downVotesBy.length} />
                   </Stack>
                 </Stack>
               </CardActions>

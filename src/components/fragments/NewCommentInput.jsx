@@ -74,6 +74,10 @@ export default function NewCommentInput({ authUser, onCommentSubmitted }) {
   );
 }
 NewCommentInput.propTypes = {
-  authUser: PropTypes.shape(userShape).isRequired,
+  authUser: PropTypes.shape(userShape),
   onCommentSubmitted: PropTypes.func.isRequired,
 };
+
+NewCommentInput.defaultProps = {
+  authUser : null
+}

@@ -3,6 +3,7 @@ import { ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/materia
 import Avatar from '@mui/material/Avatar';
 import userShape from '../data/types/user-shape';
 
+/** * Component for leaderboard item on leaderboard list */
 export default function LeaderboardItem({ user, score }) {
   return (
     <ListItem secondaryAction={<Typography variant="subtitle1">{score}</Typography>}>
@@ -15,6 +16,12 @@ export default function LeaderboardItem({ user, score }) {
 }
 
 LeaderboardItem.propTypes = {
+  /**
+   * User object that will represent this leaderboard item
+   */
   user: PropTypes.shape(userShape).isRequired,
+  /**
+   * The score that will be displayed
+   */
   score: PropTypes.number.isRequired,
 };

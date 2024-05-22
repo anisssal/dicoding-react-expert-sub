@@ -7,7 +7,7 @@ export default function CommentList({ comments, authUserId, onToggleDownVoted, o
   return (
     <Stack direction="column" sx={{ pt: 1 }}>
       <Typography variant="h6" sx={{ ml: 1, mb: 0.5 }}>
-        {`${comments.length} Comment${comments.length > 1 ? 's' : ''}`}{' '}
+        {`${comments.length} Comment${comments.length > 1 ? 's' : ''}`}
       </Typography>
       {comments.map((comment, index) => (
         <CommentItem
@@ -29,7 +29,12 @@ export default function CommentList({ comments, authUserId, onToggleDownVoted, o
 }
 CommentList.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape(commentItemShape)).isRequired,
-  authUserId: PropTypes.string.isRequired,
+  authUserId: PropTypes.string,
   onToggleUpVoted: PropTypes.func.isRequired,
   onToggleDownVoted: PropTypes.func.isRequired,
 };
+
+CommentList.defaultProps = {
+    authUserId : null
+}
+

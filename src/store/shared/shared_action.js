@@ -15,4 +15,5 @@ export const asyncPopulateUsersAndThreads = createAsyncThunk('shared/populateUse
     return rejectWithValue(error.message);
   }
   dispatch(hideGlobalLoading());
+  return null;
 });

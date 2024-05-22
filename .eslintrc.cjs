@@ -4,7 +4,7 @@ module.exports = {
         browser: true, es2020: true,
         "cypress/globals": true
     },
-    extends: ['airbnb', 'prettier', 'plugin:react/recommended', 'plugin:react/jsx-runtime', 'plugin:react-hooks/recommended'],
+    extends: ['airbnb', 'prettier', 'plugin:react/recommended', 'plugin:react/jsx-runtime', 'plugin:react-hooks/recommended', 'plugin:storybook/recommended'],
     ignorePatterns: ['dist', '.eslintrc.cjs'],
     parserOptions: {ecmaVersion: 'latest', sourceType: 'module'},
     settings: {

@@ -3,23 +3,35 @@ import parse from 'html-react-parser';
 import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
 import Link from '@mui/material/Link';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import threadItemShape from '../../data/types/thread-item-shape';
-import { DETAIL_THREAD_ROUTE } from '../../utils/route-name';
+import { DETAIL_THREAD_ROUTE, LOGIN_ROUTE } from '../../utils/route-name';
 import ThreadCardHeader from './ThreadCardHeader';
-import UpVoteButton from '../action/UpVoteButton';
-import DownVoteButton from '../action/DownVoteButton';
 import ThreadTagChip from './ThreadTagChip';
+import VoteButton from '../action/VoteButton';
 
 function ThreadCard({ id, title, body, category, createdAt, user, authUserId, upVotesBy, downVotesBy, totalComments, onToggleDownVoted, onToggleUpVoted }) {
+  const { authUser } = useSelector((states) => states.auth);
+  const navigate = useNavigate();
+
   const isUpVoted = upVotesBy.includes(authUserId);
   const isDownVoted = downVotesBy.includes(authUserId);
 
+  function checkAuth() {
+    if (!authUser) {
+      navigate(LOGIN_ROUTE);
+      return false;
+    }
+    return true;
+  }
+
   function onUpvoteClick() {
-    onToggleUpVoted(id, authUserId);
+    if (checkAuth()) onToggleUpVoted(id, authUserId);
   }
 
   function onDownVoteClick() {
-    onToggleDownVoted(id, authUserId);
+    if (checkAuth()) onToggleDownVoted(id, authUserId);
   }
 
   return (
@@ -49,9 +61,8 @@ function ThreadCard({ id, title, body, category, createdAt, user, authUserId, up
         <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
           <ThreadTagChip category={category} />
           <Stack direction="row" spacing={1.2}>
-            <UpVoteButton isUpVoted={isUpVoted} onUpvoteClick={() => onUpvoteClick()} totalVote={upVotesBy.length} />
-
-            <DownVoteButton isDownVoted={isDownVoted} onDownVoteClick={() => onDownVoteClick()} totalVote={downVotesBy.length} />
+            <VoteButton iconType="upvote" isVoted={isUpVoted} onVoteClick={() => onUpvoteClick()} totalVote={upVotesBy.length} />
+            <VoteButton iconType="downvote" isVoted={isDownVoted} onVoteClick={() => onDownVoteClick()} totalVote={downVotesBy.length} />
 
             <Stack direction="row" alignItems="center">
               <Link component={IconButton} disableRipple href={`${DETAIL_THREAD_ROUTE}/${id}`}>

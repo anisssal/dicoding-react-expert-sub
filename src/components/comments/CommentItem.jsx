@@ -1,10 +1,9 @@
 import { Avatar, Box, Divider, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
-import UpVoteButton from '../action/UpVoteButton';
-import DownVoteButton from '../action/DownVoteButton';
 import { postedAt } from '../../utils/index';
 import commentItemShape from '../../data/types/comment-item-shape';
+import VoteButton from '../action/VoteButton';
 
 export default function CommentItem({ id, content, upVotesBy, downVotesBy, createdAt, owner, authUserId, onToggleUpVoted, onToggleDownVoted, isLastItem }) {
   const isUpVoted = upVotesBy.includes(authUserId);
@@ -48,9 +47,8 @@ export default function CommentItem({ id, content, upVotesBy, downVotesBy, creat
       </Typography>
       <Stack direction="row" justifyContent="flex-end" sx={{ width: '100%', mb: 1 }}>
         <Stack direction="row" spacing={1.2}>
-          <UpVoteButton isUpVoted={isUpVoted} onUpvoteClick={() => onUpvoteClick()} totalVote={upVotesBy.length} />
-
-          <DownVoteButton isDownVoted={isDownVoted} onDownVoteClick={() => onDownVoteClick()} totalVote={downVotesBy.length} />
+          <VoteButton iconType="upvote" isVoted={isUpVoted} onVoteClick={() => onUpvoteClick()} totalVote={upVotesBy.length} />
+          <VoteButton iconType="downvote" isVoted={isDownVoted} onVoteClick={() => onDownVoteClick()} totalVote={downVotesBy.length} />
         </Stack>
       </Stack>
       {!isLastItem && <Divider variant="middle" />}
@@ -59,8 +57,12 @@ export default function CommentItem({ id, content, upVotesBy, downVotesBy, creat
 }
 CommentItem.propTypes = {
   ...commentItemShape,
-  authUserId: PropTypes.string.isRequired,
+  authUserId: PropTypes.string,
   onToggleUpVoted: PropTypes.func.isRequired,
   onToggleDownVoted: PropTypes.func.isRequired,
   isLastItem: PropTypes.bool.isRequired,
 };
+
+CommentItem.defaultProps = {
+    authUserId : null
+}
