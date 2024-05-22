@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import reducer, {hideGlobalLoading, showGlobalLoading} from "./common_slice";
-import {asyncPostThread} from "../threads/action.js";
-import {asyncPreloadProcess} from "./common_action.js";
+import {asyncPreloadProcess} from "./common_action";
 
 /**
  *common_slice reducers test

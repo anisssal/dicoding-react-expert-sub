@@ -13,4 +13,5 @@ export const asyncPopulateLeaderboard = createAsyncThunk('shared/populateUserAnd
     return rejectWithValue(error.message);
   }
   dispatch(hideGlobalLoading());
+  return null;
 });

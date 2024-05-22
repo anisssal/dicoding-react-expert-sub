@@ -6,8 +6,7 @@ import reducer, {
   toggleDownVoteThread,
   toggleUpVoteThread
 } from './threads_slice';
-import {asyncGetDetailThread, asyncPostCommentThread} from "../detail_thread/action.js";
-import {asyncPostThread} from "./action.js";
+import {asyncPostThread} from "./action";
 
 /**
  *thread slice reducers test
